@@ -1,5 +1,6 @@
 import { Payment, columns } from "./columns"
 import { DataTable } from "./data-table"
+import {ModeToggle} from "@/components/theme/dark-mode"
 
 async function getData(): Promise<Payment[]> {
   // Fetch data from your API here.
@@ -32,6 +33,7 @@ export default async function DemoPage() {
 
   return (
     <div className="container mx-auto py-10">
+        <ModeToggle />
       <DataTable columns={columns} data={data} />
     </div>
   )
