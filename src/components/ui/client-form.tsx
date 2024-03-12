@@ -59,9 +59,8 @@ export function ClientForm() {
   }
   return (
     //style={{background:"red"}}
-    // <div style={{background:"white"}} className="relative">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className=" flex flex-row" >
+        <form onSubmit={form.handleSubmit(onSubmit)} className=" mt-4  flex flex-row" >
           <div  className="gap-x-4 flex flex-row  items-end justify-between mb-2 ">
           {/* style={{background:"blue"}} */}
             <div>
@@ -72,7 +71,6 @@ export function ClientForm() {
                   <FormItem>
                     <FormLabel>Lab Name</FormLabel>
                     <FormControl>
-                    {/* onSubmit={(e: React.KeyboardEvent<HTMLInputElement>) => {e.key === 'Enter' && e.preventDefault(); }}  */}
                       <Input 
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
@@ -115,7 +113,6 @@ export function ClientForm() {
                       }
                     }}
                      placeholder="placeholder..." {...field} />
-                     {/* onSubmit={(e: React.KeyboardEvent<HTMLInputElement>) => {e.key === 'Enter' && e.preventDefault(); }} */}
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -141,7 +138,6 @@ export function ClientForm() {
                         }
                       }
                     }}
-                    // onSubmit={e => { e.preventDefault(); }}
                      required={false} placeholder="placeholder..." {...field} />
                   </FormControl>
                   <FormMessage />
@@ -168,7 +164,6 @@ export function ClientForm() {
                         }
                       }
                     }}
-                    // onSubmit={e => { e.preventDefault(); }} 
                     placeholder="placeholder..." {...field} />
                   </FormControl>
                   <FormMessage />
@@ -222,7 +217,6 @@ export function ClientForm() {
           {/* className="items-end py-4" */}
         </form>
       </Form>
-    // </div>
     
   )
 }

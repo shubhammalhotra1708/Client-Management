@@ -162,7 +162,7 @@ const FormMessage = React.forwardRef<
       // style={{background:"yellow"}}
       id={formMessageId}
       className={cn("text-[0.8rem] font-medium text-destructive", className)}
-      style={{ minHeight: "4rem" }}
+      style={{ minHeight: "3rem" }}
       {...props}
     >
       {body}
