@@ -7,7 +7,7 @@ import { ClientForm } from "@/components/ui/client-form"
 export default async function DemoPage() {
   // const data = await getData()
   const data = await getClientData();
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="container mx-auto py-10">

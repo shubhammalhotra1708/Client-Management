@@ -58,6 +58,7 @@ const useFormField = () => {
     formItemId: `${id}-form-item`,
     formDescriptionId: `${id}-form-item-description`,
     formMessageId: `${id}-form-item-message`,
+ 
     ...fieldState,
   }
 }
@@ -78,7 +79,8 @@ const FormItem = React.forwardRef<
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      <div ref={ref} className={cn("space-y-2 ", className)} {...props} /> 
+      {/* bg-black */}
     </FormItemContext.Provider>
   )
 })
@@ -111,7 +113,7 @@ const FormControl = React.forwardRef<
   return (
     <Slot
       ref={ref}
-      // style={{background:"white"}}
+      // style={{background:"blue"}}
       id={formItemId}
       aria-describedby={
         !error
@@ -148,10 +150,11 @@ const FormMessage = React.forwardRef<
 >(({ className, children, ...props }, ref) => {
   const { error, formMessageId } = useFormField()
   const body = error ? String(error?.message) : children
+  // const body = error && formMessageId=="" ? String(error?.message) : children
 
-  if (!body) {
-    return null
-  }
+  // if (!body) {
+  //   return null
+  // }
 
   return (
     <p
@@ -159,6 +162,7 @@ const FormMessage = React.forwardRef<
       // style={{background:"yellow"}}
       id={formMessageId}
       className={cn("text-[0.8rem] font-medium text-destructive", className)}
+      style={{ minHeight: "4rem" }}
       {...props}
     >
       {body}

@@ -54,6 +54,7 @@ export function ClientForm() {
   function onSubmit(values: z.infer<typeof schema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    form.reset();
     console.log(values)
   }
   return (
@@ -61,20 +62,38 @@ export function ClientForm() {
     // <div style={{background:"white"}} className="relative">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className=" flex flex-row" >
-          <div className="gap-x-4 flex flex-row  items-end justify-between mb-2 py-2">
-            <FormField
-              control={form.control}
-              name="labName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Lab Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="placeholder..." {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          <div  className="gap-x-4 flex flex-row  items-end justify-between mb-2 ">
+          {/* style={{background:"blue"}} */}
+            <div>
+              <FormField
+                control={form.control}
+                name="labName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Lab Name</FormLabel>
+                    <FormControl>
+                    {/* onSubmit={(e: React.KeyboardEvent<HTMLInputElement>) => {e.key === 'Enter' && e.preventDefault(); }}  */}
+                      <Input 
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          // Focus on the next input field
+                          const nextInput = document.querySelector<HTMLInputElement>(
+                            '[name="clientName"]'
+                          );
+                          if (nextInput) {
+                            nextInput.focus();
+                          }
+                        }
+                      }}
+                      placeholder="placeholder..." {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            
             <FormField
               control={form.control}
               name="clientName"
@@ -82,7 +101,21 @@ export function ClientForm() {
                 <FormItem>
                   <FormLabel>Client Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="placeholder..." {...field} />
+                    <Input
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        // Focus on the next input field
+                        const nextInput = document.querySelector<HTMLInputElement>(
+                          '[name="clientHostName"]'
+                        );
+                        if (nextInput) {
+                          nextInput.focus();
+                        }
+                      }
+                    }}
+                     placeholder="placeholder..." {...field} />
+                     {/* onSubmit={(e: React.KeyboardEvent<HTMLInputElement>) => {e.key === 'Enter' && e.preventDefault(); }} */}
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -95,7 +128,21 @@ export function ClientForm() {
                 <FormItem>
                   <FormLabel>Client IP</FormLabel>
                   <FormControl>
-                    <Input placeholder="placeholder..." {...field} />
+                    <Input 
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        // Focus on the next input field
+                        const nextInput = document.querySelector<HTMLInputElement>(
+                          '[name="hostPort"]'
+                        );
+                        if (nextInput) {
+                          nextInput.focus();
+                        }
+                      }
+                    }}
+                    // onSubmit={e => { e.preventDefault(); }}
+                     required={false} placeholder="placeholder..." {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -108,7 +155,21 @@ export function ClientForm() {
                 <FormItem>
                   <FormLabel>Host Port</FormLabel>
                   <FormControl>
-                    <Input placeholder="placeholder..." {...field} />
+                    <Input 
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        // Focus on the next input field
+                        const nextInput = document.querySelector<HTMLInputElement>(
+                          '[name="adminUsername"]'
+                        );
+                        if (nextInput) {
+                          nextInput.focus();
+                        }
+                      }
+                    }}
+                    // onSubmit={e => { e.preventDefault(); }} 
+                    placeholder="placeholder..." {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -121,7 +182,20 @@ export function ClientForm() {
                 <FormItem>
                   <FormLabel>Admin Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="placeholder..." {...field} />
+                    <Input 
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        // Focus on the next input field
+                        const nextInput = document.querySelector<HTMLInputElement>(
+                          '[name="adminPassword"]'
+                        );
+                        if (nextInput) {
+                          nextInput.focus();
+                        }
+                      }
+                    }}
+                    placeholder="placeholder..." {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -141,9 +215,9 @@ export function ClientForm() {
               )}
             />
           </div>
-
+          {/* className="bg-white" */}
           <div >
-            <Button  className="mt-10 mx-4" type="submit">Submit</Button> 
+            <Button  className="mt-8 mx-4" type="submit">Submit</Button> 
           </div>
           {/* className="items-end py-4" */}
         </form>
