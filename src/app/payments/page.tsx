@@ -1,8 +1,9 @@
-import { columns } from "./columns"
-import { DataTable } from "./data-table"
+import { columns } from "../../components/custom/columns"
+import { DataTable } from "../../components/custom/data-table"
 import {ModeToggle} from "@/components/theme/dark-mode"
 import { getClientData } from "@/actions/getClientData"
-import { ClientForm } from "@/components/ui/client-form"
+import { ClientForm } from "@/components/custom/client-form"
+import { SsidForm } from "@/components/custom/ssid-form"
 
 export default async function DemoPage() {
   // const data = await getData()
@@ -13,6 +14,7 @@ export default async function DemoPage() {
     <div className="container mx-auto py-10">
       <ModeToggle />
       <ClientForm />
+      {/* <SsidForm /> */}
       <DataTable columns={columns} data={data} />
     </div>
   )

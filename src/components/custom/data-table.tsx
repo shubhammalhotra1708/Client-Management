@@ -115,30 +115,6 @@ export function DataTable<TData, TValue>({
         </div>
         {/* selected rows and pagination */}
         <DataTablePagination table={table} />
-        {/* <div className="flex items-center justify-between">
-            <div className="py-4 text-sm text-muted-foreground">
-                {table.getFilteredSelectedRowModel().rows.length} of{" "}
-                {table.getFilteredRowModel().rows.length} row(s) selected.
-            </div>
-            <div >
-                <Pagination>
-                    <PaginationContent>
-                        <PaginationItem>
-                        <PaginationPrevious href="#" />
-                        </PaginationItem>
-                        <PaginationItem>
-                        <PaginationLink href="#">1</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                        <PaginationEllipsis />
-                        </PaginationItem>
-                        <PaginationItem>
-                        <PaginationNext href="#" />
-                        </PaginationItem>
-                    </PaginationContent>
-                </Pagination>
-            </div>
-        </div> */}
         
     </div>
 

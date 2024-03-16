@@ -14,14 +14,20 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useFormStatus } from "react-dom"
+import { ReloadIcon } from "@radix-ui/react-icons"
+import { useFormState } from "react-dom"
+// import { init } from "next/dist/compiled/webpack/webpack"
+import { addClientData } from "@/actions/addClientData"
+
 
 const schema = z.object({
-  labName: z.string().min(1),
-  clientName: z.string().min(1),
-  clientHostName: z.string().min(1),
-  hostPort: z.string().min(1),
-  adminUsername: z.string().min(1),
-  adminPassword: z.string().min(1),
+  ssidName: z.string().min(1),
+  ssidSecurity: z.string().min(1),
+  ssidPassword: z.string().min(1),
+  // hostPort: z.string().min(1),
+  // adminUsername: z.string().min(1),
+  // adminPassword: z.string().min(1),
 });
 // const parse = schema.safeParse({
 //   labName: formData.get('labName'),
@@ -36,17 +42,17 @@ const schema = z.object({
 //   username: z.string().min(2).max(50),
 // })
 
-export function ClientForm() {
+export function SsidForm() {
   // 1. Define your form.
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      labName: "",
-      clientName: "",
-      clientHostName: "",
-      hostPort: "",
-      adminUsername: "",
-      adminPassword: "",
+      ssidName: "",
+      ssidPassword: "",
+      ssidSecurity: "",
+      // hostPort: "",
+      // adminUsername: "",
+      // adminPassword: "",
     },
   })
  
@@ -54,22 +60,53 @@ export function ClientForm() {
   function onSubmit(values: z.infer<typeof schema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    setTimeout(() => {
+      console.log("Hello, World!");
+    }, 2000);
     form.reset();
     console.log(values)
   }
+ 
+ 
+ function ButtonLoading() {
   return (
-    //style={{background:"red"}}
+    <Button className="mt-8 mx-4" disabled>
+      <ReloadIcon className=" mr-2 h-4 w-4 animate-spin " />
+      Please wait
+    </Button>
+  )
+}
+  const {pending} = useFormStatus();
+
+  const SubmitButton = () => {
+    return (
+      <Button type="submit" className="mt-8 mx-4" >
+        Submit
+      </Button>
+    );
+  }
+  const initialState = {
+    message: null,
+  }
+  // const [state , clientAction] = useFormState(addClientData , initialState);
+  return (
+    //style={{background:"red"}} action={}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className=" mt-4  flex flex-row" >
+        <form 
+          onSubmit={form.handleSubmit(onSubmit)}
+          // action={addClientData}
+          // style={{background:"blue"}} 
+          // action="onSubmit"
+          className="flex flex-row" >
           <div  className="gap-x-4 flex flex-row  items-end justify-between mb-2 ">
           {/* style={{background:"blue"}} */}
             <div>
               <FormField
                 control={form.control}
-                name="labName"
+                name="ssidName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Lab Name</FormLabel>
+                    <FormLabel>SSID</FormLabel>
                     <FormControl>
                       <Input 
                       onKeyDown={(e) => {
@@ -77,7 +114,7 @@ export function ClientForm() {
                           e.preventDefault();
                           // Focus on the next input field
                           const nextInput = document.querySelector<HTMLInputElement>(
-                            '[name="clientName"]'
+                            '[name="ssidSecurity"]'
                           );
                           if (nextInput) {
                             nextInput.focus();
@@ -94,10 +131,10 @@ export function ClientForm() {
             
             <FormField
               control={form.control}
-              name="clientName"
+              name="ssidSecurity"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Client Name</FormLabel>
+                  <FormLabel>Security</FormLabel>
                   <FormControl>
                     <Input
                     onKeyDown={(e) => {
@@ -105,13 +142,14 @@ export function ClientForm() {
                         e.preventDefault();
                         // Focus on the next input field
                         const nextInput = document.querySelector<HTMLInputElement>(
-                          '[name="clientHostName"]'
+                          '[name="ssidPassword"]'
                         );
                         if (nextInput) {
                           nextInput.focus();
                         }
                       }
                     }}
+                    
                      placeholder="placeholder..." {...field} />
                   </FormControl>
                   <FormMessage />
@@ -120,31 +158,32 @@ export function ClientForm() {
             />
             <FormField
               control={form.control}
-              name="clientHostName"
+              name="ssidPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Client IP</FormLabel>
+                  <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input 
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault();
-                        // Focus on the next input field
-                        const nextInput = document.querySelector<HTMLInputElement>(
-                          '[name="hostPort"]'
-                        );
-                        if (nextInput) {
-                          nextInput.focus();
-                        }
-                      }
-                    }}
-                     required={false} placeholder="placeholder..." {...field} />
+                    // onKeyDown={(e) => {
+                    //   if (e.key === "Enter") {
+                    //     e.preventDefault();
+                    //     // Focus on the next input field
+                    //     const nextInput = document.querySelector<HTMLInputElement>(
+                    //       '[name="hostPort"]'
+                    //     );
+                    //     if (nextInput) {
+                    //       nextInput.focus();
+                    //     }
+                    //   }
+                    // }}
+                    //  required={true} 
+                     placeholder="placeholder..." {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="hostPort"
               render={({ field }) => (
@@ -208,11 +247,13 @@ export function ClientForm() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
           </div>
           {/* className="bg-white" */}
           <div >
+            {/* <SubmitButton /> */}
             <Button  className="mt-8 mx-4" type="submit">Submit</Button> 
+            {/* {pending ? <ButtonLoading /> : <SubmitButton />} */}
           </div>
           {/* className="items-end py-4" */}
         </form>

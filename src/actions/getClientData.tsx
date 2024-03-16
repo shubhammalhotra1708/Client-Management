@@ -1,30 +1,36 @@
-import axios from 'axios'
+"use server"
+import { TClient, TDataAll } from '@/types/types';
 
 const baseUrl = process.env.BASE_URL;
 const token = process.env.TOKEN;
-axios.defaults.headers.common = {
-    'Authorization': `Bearer ${token}`
-};
-import { TClient,TDataAll} from '@/types/types';
-export async function getClientData() : Promise<TClient[]> {
-    let filteredData: TClient[] = []; // Declare the filteredData variable
+
+export async function getClientData(): Promise<TClient[]> {
+    let filteredData: TClient[] = [];
 
     try {
-        const response = await axios.get(baseUrl+'/manage/clients');
-        
-        filteredData = response.data.map((user: TDataAll) => { // Add type annotation to 'user' parameter
+        const response = await fetch(`${baseUrl}/manage/clients`, {
+            // cache: 'force-cache',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: TDataAll[] = await response.json();
+
+        filteredData = data.map((user: TDataAll) => {
             const filteredUser = Object.fromEntries(
                 Object.entries(user)
                     .filter(([key]) => key !== 'user' && key !== 'created_at' && key !== 'updated_at')
-            );
+            ) as TClient;
             return filteredUser;
         });
-
-        // console.log(filteredData); // For checking the filtered data
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 
     return filteredData;
-
 }

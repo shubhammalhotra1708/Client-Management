@@ -22,4 +22,4 @@ export type TDataAll = {
     clientPassword?: string;
     clientLab?: string;
     description?: string;
-}
+};
