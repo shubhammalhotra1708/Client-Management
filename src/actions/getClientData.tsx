@@ -9,19 +9,20 @@ export async function getClientData(): Promise<TClient[]> {
 
     try {
         const response = await fetch(`${baseUrl}/manage/clients`, {
-            // cache: 'force-cache',
+            cache: 'no-store' ,
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         });
+        // console.log(`${baseUrl}/manage/clients`)
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const data: TDataAll[] = await response.json();
+        const data: TClient[] = await response.json();
 
-        filteredData = data.map((user: TDataAll) => {
+        filteredData = data.map((user: TClient) => {
             const filteredUser = Object.fromEntries(
                 Object.entries(user)
                     .filter(([key]) => key !== 'user' && key !== 'created_at' && key !== 'updated_at')

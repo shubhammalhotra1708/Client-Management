@@ -62,6 +62,7 @@ const TableRow = React.forwardRef<
       className
     )}
     {...props}
+      
   />
 ))
 TableRow.displayName = "TableRow"
@@ -85,10 +86,13 @@ const TableCell = React.forwardRef<
   HTMLTableCellElement,
   React.TdHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
+
+  
   <td
     ref={ref}
+    // flex-col justify-start content-start align-start
     className={cn(
-      "p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+      "p-2   [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
       className
     )}
     {...props}

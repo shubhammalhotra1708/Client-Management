@@ -13,6 +13,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import * as React from "react"
+import { CaretSortIcon } from "@radix-ui/react-icons"
+// import type { TableData } from "@/types/types"
+
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import { CollapsibleComp } from "./collapsible-comp"
+
+
 import { TClient } from "@/types/types"
 
 export const columns : ColumnDef<TClient>[] = [
@@ -46,6 +58,16 @@ export const columns : ColumnDef<TClient>[] = [
         return (
             <DataTableColumnHeader column={column} title="Lab Name" />
         )
+    },
+    cell: ({ row }) => {
+      const rowData : TClient = row.original
+      console.log("row data in cols")
+      console.log(rowData)
+      return (
+        <div className="flex flex-row items-center ">
+          <CollapsibleComp data = {rowData}/>
+        </div>
+      );
     },
   },
   {
@@ -94,6 +116,8 @@ export const columns : ColumnDef<TClient>[] = [
       const client = row.original
  
       return (
+        <div className="flex flex-row">
+          {/* <CollapsibleComp /> */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
@@ -113,6 +137,8 @@ export const columns : ColumnDef<TClient>[] = [
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        </div>
+
       )
     },
   },
