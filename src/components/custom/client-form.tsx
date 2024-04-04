@@ -19,7 +19,7 @@ import { useFormStatus } from "react-dom"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { useFormState } from "react-dom"
 import { addClientData } from "@/actions/addClientData"
-import { useRef } from "react"
+// import { useRef } from "react"
 import {schema} from "./client-schema"
 
 
@@ -52,11 +52,12 @@ export function ClientForm() {
       clientName: "",
       clientHostName: "",
       hostPort: "",
+      interfaceNumber: "",
       adminUsername: "",
       adminPassword: "",
     },
   })
-  const formRef = useRef<HTMLFormElement>(null);
+  // const formRef = useRef<HTMLFormElement>(null);
 
   function onSubmit(values: z.infer<typeof schema>) {
     // Do something with the form values.
@@ -167,6 +168,32 @@ export function ClientForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Host Port</FormLabel>
+                  <FormControl>
+                    <Input 
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        // Focus on the next input field
+                        const nextInput = document.querySelector<HTMLInputElement>(
+                          '[name="adminUsername"]'
+                        );
+                        if (nextInput) {
+                          nextInput.focus();
+                        }
+                      }
+                    }}
+                    placeholder="placeholder..." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="interfaceNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Interface</FormLabel>
                   <FormControl>
                     <Input 
                     onKeyDown={(e) => {

@@ -4,6 +4,7 @@ export const schema = z.object({
   clientName: z.string().trim().min(1),
   clientHostName: z.string().trim().min(1),
   hostPort: z.string().trim().min(1),
+  interfaceNumber: z.string().trim().min(1),
   adminPassword: z.string().trim().min(1),
   adminUsername: z.string().trim().min(1),
 });

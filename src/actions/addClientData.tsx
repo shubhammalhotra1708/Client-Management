@@ -44,7 +44,7 @@ export async function addClientData(
 ){
   // Hardcoded values
   const user = 1;
-  const interfaceVal = "en1";
+  // const interfaceVal = "en0";
   const description = "Test description";
   const trafficProfile = "SampleProfile";
 
@@ -59,7 +59,7 @@ export async function addClientData(
     "clientLab": `${data.labName}`, // Remove quotation marks
     "traffic_profile": trafficProfile,
     "description": description,
-    "interface": interfaceVal,
+    "interface": `${data.interfaceNumber}`,
   };
 
 console.log(JSON.stringify(bd));

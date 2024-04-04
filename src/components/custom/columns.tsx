@@ -14,16 +14,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import * as React from "react"
-import { CaretSortIcon } from "@radix-ui/react-icons"
-// import type { TableData } from "@/types/types"
-
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
-import { CollapsibleComp } from "./collapsible-comp"
-
+import { CaretDownIcon, CaretSortIcon, CaretUpIcon } from "@radix-ui/react-icons"
+import { IconCaretUp,IconCaretDown } from "@tabler/icons-react"
 
 import { TClient } from "@/types/types"
 
@@ -32,6 +24,7 @@ export const columns : ColumnDef<TClient>[] = [
       {
         id: "select",
         header: ({ table }) => (
+          <>
           <Checkbox
             checked={
               table.getIsAllPageRowsSelected() ||
@@ -40,13 +33,55 @@ export const columns : ColumnDef<TClient>[] = [
             onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
             aria-label="Select all"
           />
+          <button
+              {...{
+                onClick: table.getToggleAllRowsExpandedHandler(),
+              }}
+              style={{marginLeft: "16px"}}
+            >
+              {table.getIsAllRowsExpanded() ? <CaretUpIcon/> : <CaretDownIcon/>}
+            </button>{' '}
+          </>
+
         ),
-        cell: ({ row }) => (
-          <Checkbox
-            checked={row.getIsSelected()}
-            onCheckedChange={(value) => row.toggleSelected(!!value)}
-            aria-label="Select row"
-          />
+        
+        cell: ({ row,getValue }) => (
+          
+          <div
+            style={{
+              
+              paddingLeft: `${row.depth * 2}rem`,
+            }}
+          >
+            <div>
+            <Checkbox
+              checked={row.getIsSelected()}
+              onCheckedChange={(value) => row.toggleSelected(!!value)}
+              aria-label="Select row"
+            />
+            {' '}
+              <Button variant="ghost" size="sm">
+                <CaretSortIcon className="h-4 w-4" />
+                <span className="sr-only">Toggle</span>
+              </Button> 
+              {/* {row.getCanExpand() ? (
+                <button
+                  {...{
+                    onClick: row.getToggleExpandedHandler(),
+                    style: { cursor: 'pointer' },
+                  }}
+                >
+                  
+                  {row.getIsExpanded() ? '👇' : '👉'}
+                </button>
+              ) : (
+                'button'
+              )}{' '} */}
+              {/* <h1>{getValue()}</h1> */}
+              {getValue<boolean>()}
+              </div>
+            </div>
+          
         ),
         enableSorting: false,
         enableHiding: false,
@@ -54,24 +89,16 @@ export const columns : ColumnDef<TClient>[] = [
     //columns definition
   {
     accessorKey: "clientLab",
+    id:"clientLab",
     header: ({ column }) => {
         return (
             <DataTableColumnHeader column={column} title="Lab Name" />
         )
     },
-    cell: ({ row }) => {
-      const rowData : TClient = row.original
-      console.log("row data in cols")
-      console.log(rowData)
-      return (
-        <div className="flex flex-row items-center ">
-          <CollapsibleComp data = {rowData}/>
-        </div>
-      );
-    },
   },
   {
     accessorKey: "clientName",
+    id:"clientName",
     header: ({ column }) => {
         return (
             <DataTableColumnHeader column={column} title="Client Name" />
@@ -87,29 +114,30 @@ export const columns : ColumnDef<TClient>[] = [
     },
   },
   {
-    accessorKey: "clientPort",
+    accessorKey: "status",
     header: ({ column }) => {
         return (
-            <DataTableColumnHeader column={column} title="Host Port" />
+            <DataTableColumnHeader column={column} title="Status" />
         )
     },
   },
   {
-    accessorKey: "clientUsername",
+    accessorKey: "ssidname",
     header: ({ column }) => {
         return (
-            <DataTableColumnHeader column={column} title="Admin Username" />
+            <DataTableColumnHeader column={column} title="SSID" />
         )
     },
   },
   {
-    accessorKey: "clientPassword",
+    accessorKey: "bssid",
     header: ({ column }) => {
         return (
-            <DataTableColumnHeader column={column} title="Admin Password" />
+            <DataTableColumnHeader column={column} title="BSSID" />
         )
     },
   },
+  
   {
     id: "actions",
     cell: ({ row }) => {
