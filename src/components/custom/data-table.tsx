@@ -31,38 +31,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-
-const ExpandedContent: React.FC<any> = (details) => {
-  console.log("hi")
-  console.log(details);
-  console.log(`client ${details.details.id}`)
-  const excludeFields = ['status', 'clientIP', 'id', 'clientPort' , 'clientName', 'clientLab', 'ssidname' , 'bssid'];
-  
-  return (
-    <>
-      <TableRow>
-        <TableCell style={{alignItems:"center"}} colSpan={8}>
-          <div style={{display:'grid', gridTemplateColumns:'auto auto auto auto auto ', padding:'10px',rowGap:'20px'}}>
-            {Object.entries(details.details).map(([key, value]) => (
-              // Check if the field is not in the exclude list
-              excludeFields.includes(key) ? null : (
-              
-              <div style={{width:'80px' , height: '50px'}} key={key}>
-                <div style={{}}><strong>{key}: </strong></div>
-                <div>
-                {!value ? '' : (value as string).toString()}
-                </div>
-              </div>
-              )))}
-        </div>
-        </TableCell>
-      </TableRow>
-    </>
-
-  );
-};
-
-export default ExpandedContent;
+import ExpandedContent from "./expanded-content"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]

@@ -15,7 +15,10 @@ import {
 } from "@/components/ui/dropdown-menu"
 import * as React from "react"
 import { CaretDownIcon, CaretSortIcon, CaretUpIcon } from "@radix-ui/react-icons"
-import { IconCaretUp,IconCaretDown } from "@tabler/icons-react"
+// import { IconCaretUp,IconCaretDown } from "@tabler/icons-react"
+
+import { MdOutlineWifi } from "react-icons/md";
+import { CgEthernet } from "react-icons/cg";
 
 import { TClient } from "@/types/types"
 
@@ -120,6 +123,32 @@ export const columns : ColumnDef<TClient>[] = [
             <DataTableColumnHeader column={column} title="Status" />
         )
     },
+    cell: ({ row }) => {
+      // const st=row.original.status
+      // console.log(`client is ${st}`)
+      return (
+        <div className="flex flex-row justify-start  items-center">
+          {row.original.status ? (
+            <>
+            <CgEthernet className="ml-1" color="green" size={18}/> ethernet status
+            <MdOutlineWifi className="ml-3"  color="red" size={18} />
+            </>
+
+
+            // <div className="h-3 w-3 rounded-full bg-green-500 mr-2" >
+              // <h1 className="sr-only">Online</h1>
+            // </div>
+          ) : (
+            <>
+            <CgEthernet className="ml-1"  color="red" size={18} />
+            <MdOutlineWifi className="ml-3"  color="red" size={18} />
+            </>
+
+          )}
+          <h1>{row.original.status}</h1>
+        </div>
+      )
+    }
   },
   {
     accessorKey: "ssidname",
