@@ -1,30 +1,25 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {DataTableColumnHeader} from "@/components/ui/datatable-column-header"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import * as React from "react"
-import { CaretDownIcon, CaretSortIcon, CaretUpIcon } from "@radix-ui/react-icons"
-// import { IconCaretUp,IconCaretDown } from "@tabler/icons-react"
+import {EditClient} from "@/components/custom/crud/edit-client"
+import { DeleteClient } from "../crud/delete-client"
+import {CollapsibleTrigger} from "@/components/ui/collapsible"
 
+
+import { CaretDownIcon, CaretUpIcon } from "@radix-ui/react-icons"
 import { MdOutlineWifi } from "react-icons/md";
-import { CgEthernet } from "react-icons/cg";
+import { BsEthernet } from "react-icons/bs";
 
 import { TClient } from "@/types/types"
-
+// const
 export const columns : ColumnDef<TClient>[] = [
-      // row selection
+      
       {
+        // row selection and expansion column
         id: "select",
         header: ({ table }) => (
           <>
@@ -48,40 +43,24 @@ export const columns : ColumnDef<TClient>[] = [
 
         ),
         
-        cell: ({ row,getValue }) => (
-          
+        cell: ({ row }) => (
           <div
             style={{
-              
               paddingLeft: `${row.depth * 2}rem`,
             }}
           >
             <div>
-            <Checkbox
-              checked={row.getIsSelected()}
-              onCheckedChange={(value) => row.toggleSelected(!!value)}
-              aria-label="Select row"
-            />
-            {' '}
-              <Button variant="ghost" size="sm">
-                <CaretSortIcon className="h-4 w-4" />
-                <span className="sr-only">Toggle</span>
-              </Button> 
-              {/* {row.getCanExpand() ? (
-                <button
-                  {...{
-                    onClick: row.getToggleExpandedHandler(),
-                    style: { cursor: 'pointer' },
-                  }}
-                >
-                  
-                  {row.getIsExpanded() ? '👇' : '👉'}
-                </button>
-              ) : (
-                'button'
-              )}{' '} */}
-              {/* <h1>{getValue()}</h1> */}
-              {getValue<boolean>()}
+              <Checkbox
+                checked={row.getIsSelected()}
+                onCheckedChange={(value) => row.toggleSelected(!!value)}
+                aria-label="Select row"
+              />
+              {/* expand rows  */}
+              <CollapsibleTrigger asChild>
+                <Button variant="ghost" size="sm">
+                  <CaretUpIcon className="h-4 w-4" />
+                </Button>
+              </CollapsibleTrigger>
               </div>
             </div>
           
@@ -130,18 +109,13 @@ export const columns : ColumnDef<TClient>[] = [
         <div className="flex flex-row justify-start  items-center">
           {row.original.status ? (
             <>
-            <CgEthernet className="ml-1" color="green" size={18}/> ethernet status
-            <MdOutlineWifi className="ml-3"  color="red" size={18} />
+              <BsEthernet className="ml-1" color="green" size={15}/>
+              <MdOutlineWifi className="ml-3"  color="red" size={18} />
             </>
-
-
-            // <div className="h-3 w-3 rounded-full bg-green-500 mr-2" >
-              // <h1 className="sr-only">Online</h1>
-            // </div>
           ) : (
             <>
-            <CgEthernet className="ml-1"  color="red" size={18} />
-            <MdOutlineWifi className="ml-3"  color="red" size={18} />
+              <BsEthernet className="ml-1"  color="red" size={15} />
+              <MdOutlineWifi className="ml-3"  color="red" size={18} />
             </>
 
           )}
@@ -166,36 +140,17 @@ export const columns : ColumnDef<TClient>[] = [
         )
     },
   },
-  
   {
     id: "actions",
     cell: ({ row }) => {
       const client = row.original
+      // console.log(`client press ${client.clientName}`)
  
       return (
         <div className="flex flex-row">
-          {/* <CollapsibleComp /> */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(client.id.toString())}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              <EditClient client={client} />
+              <DeleteClient client={client} />
         </div>
-
       )
     },
   },

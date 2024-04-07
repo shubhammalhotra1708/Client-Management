@@ -2,14 +2,15 @@ import {
   TableCell,
   TableRow,
 } from "@/components/ui/table"
-import { channel } from "diagnostics_channel";
 
 const ExpandedContent: React.FC<any> = (details) => {
-  console.log("hi")
-  console.log(details);
-  console.log(`client ${details.details.id}`)
+  // console.log("hi")
+  // console.log(details);
+  // console.log(`client ${details.details.id}`)
   const excludeFields = ['status', 'clientIP', 'id', 'clientPort' , 'clientName', 'clientLab', 'ssidname' , 'bssid'];
+
   const labelsMapping: { [key: string]: string } = {
+    // Map the field to the label which is displayed in the ui
     traffic_profile: 'Traffic Profile',
     clientName: 'Client Name',
     clientUsername: 'Username',
@@ -26,8 +27,6 @@ const ExpandedContent: React.FC<any> = (details) => {
     phymode: 'PHY Mode',
     phyrate: 'PHY Rate',
     noisemeasurement: 'Noise Measurement',
-    
-    // Add more mappings as needed
   };
   
   return (

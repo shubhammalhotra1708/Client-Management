@@ -1,5 +1,5 @@
 "use server"
-import {schema} from "../components/custom/client-schema";
+import {schema} from "../types/client-schema";
 import {z} from "zod";
 import { TClient, TDataAll } from '@/types/types';
 import { revalidatePath } from "next/cache";

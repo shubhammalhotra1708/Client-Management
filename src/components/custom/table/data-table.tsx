@@ -29,7 +29,6 @@ import * as React from "react"
 import {
   Collapsible,
   CollapsibleContent,
-  CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import ExpandedContent from "./expanded-content"
 
@@ -84,7 +83,7 @@ export function DataTable<TData, TValue>({
             onChange={(event) =>
                 table.getColumn("clientName")?.setFilterValue(event.target.value)
             }
-            className="max-w-sm"
+            className="max-w-xs"
             />
         </div>
         {/* render data table */}
@@ -115,12 +114,6 @@ export function DataTable<TData, TValue>({
                       // expandable rows
                       <Collapsible key={row.id} asChild>
                         <>
-                          <CollapsibleTrigger asChild>
-                            {/* <>
-                            <Button variant="ghost" size="sm">
-                              <CaretSortIcon className="h-4 w-4" />
-                              <span className="sr-only">Toggle</span>
-                            </Button> */}
                             <TableRow data-state={row.getIsSelected() && "selected"} className="!appearance-none">
                               {row.getVisibleCells().map((cell) => (
                                 <TableCell key={cell.id}>
@@ -129,8 +122,6 @@ export function DataTable<TData, TValue>({
                                 </TableCell>
                               ))}
                             </TableRow>
-                            {/* </> */}
-                            </CollapsibleTrigger>
                           <CollapsibleContent asChild>
                             <ExpandedContent details={row.original} />
                           </CollapsibleContent>

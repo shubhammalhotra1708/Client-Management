@@ -20,7 +20,7 @@ import { ReloadIcon } from "@radix-ui/react-icons"
 import { useFormState } from "react-dom"
 import { addClientData } from "@/actions/addClientData"
 // import { useRef } from "react"
-import {schema} from "./client-schema"
+import {schema} from "../../../types/client-schema"
 
 
 
