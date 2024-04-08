@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label"
 import {TClient} from "@/types/types"
 // import { FaEdit } from "react-icons/fa";
 import { MdOutlineEdit } from "react-icons/md";
+import EditForm from "../form/edit-form"
 
 export function EditClient({client} : {client: TClient}) {
   console.log(`client ${client.ethernet_ip}`)
@@ -31,7 +32,8 @@ export function EditClient({client} : {client: TClient}) {
             Make changes to your client here. Click save when you're done.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
+        <EditForm client={client} />
+        {/* <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="labName" className="text-left">
               Lab Name
@@ -112,7 +114,7 @@ export function EditClient({client} : {client: TClient}) {
               className="col-span-3"
             />
           </div>
-        </div>
+        </div> */}
         <DialogFooter>
           <Button type="submit">Save changes</Button>
         </DialogFooter>
