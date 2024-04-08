@@ -31,14 +31,15 @@ export const columns : ColumnDef<TClient>[] = [
             onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
             aria-label="Select all"
           />
-          <button
+          <Button
               {...{
                 onClick: table.getToggleAllRowsExpandedHandler(),
               }}
-              style={{marginLeft: "16px"}}
+              variant="ghost"
+              size="sm"
             >
               {table.getIsAllRowsExpanded() ? <CaretUpIcon/> : <CaretDownIcon/>}
-            </button>{' '}
+            </Button>{' '}
           </>
 
         ),
@@ -58,7 +59,7 @@ export const columns : ColumnDef<TClient>[] = [
               {/* expand rows  */}
               <CollapsibleTrigger asChild>
                 <Button variant="ghost" size="sm">
-                  <CaretUpIcon className="h-4 w-4" />
+                  <CaretDownIcon className="h-4 w-4" />
                 </Button>
               </CollapsibleTrigger>
               </div>
@@ -70,8 +71,7 @@ export const columns : ColumnDef<TClient>[] = [
     },
     //columns definition
   {
-    accessorKey: "clientLab",
-    id:"clientLab",
+    accessorKey: "client_lab",
     header: ({ column }) => {
         return (
             <DataTableColumnHeader column={column} title="Lab Name" />
@@ -79,19 +79,18 @@ export const columns : ColumnDef<TClient>[] = [
     },
   },
   {
-    accessorKey: "clientName",
-    id:"clientName",
+    accessorKey: "hostname",
     header: ({ column }) => {
         return (
-            <DataTableColumnHeader column={column} title="Client Name" />
+            <DataTableColumnHeader column={column} title="Hostname" />
         )
     },
   },
   {
-    accessorKey: "clientIP",
+    accessorKey: "wifi_ip",
     header: ({ column }) => {
         return (
-            <DataTableColumnHeader column={column} title="Client IP" />
+            <DataTableColumnHeader column={column} title="Wifi IP" />
         )
     },
   },
@@ -103,29 +102,26 @@ export const columns : ColumnDef<TClient>[] = [
         )
     },
     cell: ({ row }) => {
-      // const st=row.original.status
-      // console.log(`client is ${st}`)
       return (
         <div className="flex flex-row justify-start  items-center">
-          {row.original.status ? (
-            <>
+          {row.original.ethernet_status ? (
               <BsEthernet className="ml-1" color="green" size={15}/>
-              <MdOutlineWifi className="ml-3"  color="red" size={18} />
-            </>
           ) : (
-            <>
               <BsEthernet className="ml-1"  color="red" size={15} />
-              <MdOutlineWifi className="ml-3"  color="red" size={18} />
-            </>
 
           )}
-          <h1>{row.original.status}</h1>
+          {row.original.wifi_status == "Connected" ? (
+              <MdOutlineWifi className="ml-3"  color="green" size={18} />
+            ):(
+              <MdOutlineWifi className="ml-3"  color="red" size={18} />
+            
+            )}
         </div>
       )
     }
   },
   {
-    accessorKey: "ssidname",
+    accessorKey: "ssid_name",
     header: ({ column }) => {
         return (
             <DataTableColumnHeader column={column} title="SSID" />
@@ -144,12 +140,10 @@ export const columns : ColumnDef<TClient>[] = [
     id: "actions",
     cell: ({ row }) => {
       const client = row.original
-      // console.log(`client press ${client.clientName}`)
- 
       return (
         <div className="flex flex-row">
-              <EditClient client={client} />
-              <DeleteClient client={client} />
+          <EditClient client={client} />
+          <DeleteClient client={client} />
         </div>
       )
     },

@@ -15,17 +15,16 @@ import {TClient} from "@/types/types"
 import { MdOutlineEdit } from "react-icons/md";
 
 export function EditClient({client} : {client: TClient}) {
-  console.log(`client ${client.clientName}`)
+  console.log(`client ${client.ethernet_ip}`)
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="ghost">
           <MdOutlineEdit size={16} />
-
         </Button>
-        {/* <Button variant="outline">Edit Profile</Button> */}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[475px]">
+      {/* width of dialog box */}
+      <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>Edit Client</DialogTitle>
           <DialogDescription>
@@ -39,37 +38,47 @@ export function EditClient({client} : {client: TClient}) {
             </Label>
             <Input
               id="labName"
-              defaultValue={client.clientLab}
+              defaultValue={client.client_lab}
+              className="col-span-3"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="descriptionName" className="text-left">
+              Description
+            </Label>
+            <Input
+              id="descriptionName"
+              defaultValue={client.client_lab}
               className="col-span-3"
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="clientName" className="text-left whitespace-nowrap">
-              Client Name
+              Hostname
             </Label>
             <Input
-              id="clientName"
-              defaultValue={client.clientName}
+              id="hostname"
+              defaultValue={client.hostname}
               className="col-span-3"
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="clientIP" className="text-left">
-              Client IP
+            <Label htmlFor="ethernetIP" className="text-left">
+              Ethernet IP
             </Label>
             <Input
-              id="clientIP"
-              defaultValue={client.clientIP}
+              id="ethernetIP"
+              defaultValue={client.ethernet_ip}
               className="col-span-3"
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="hostPort" className="text-left">
-              Host Port
+              Port
             </Label>
             <Input
               id="hostPort"
-              defaultValue={client.clientPort}
+              defaultValue={client.client_port}
               className="col-span-3"
             />
           </div>
@@ -79,27 +88,27 @@ export function EditClient({client} : {client: TClient}) {
             </Label>
             <Input
               id="interfaceNumber"
-              defaultValue={client.interface}
+              defaultValue={client.interface_name}
               className="col-span-3"
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="adminUsername" className="text-left">
-              Admin Username
+              Username
             </Label>
             <Input
               id="adminUsername"
-              defaultValue={client.clientUsername}
+              defaultValue={client.client_username}
               className="col-span-3"
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="adminPassword" className="text-left">
-              Admin Password
+              Password
             </Label>
             <Input
               id="adminPassword"
-              defaultValue={client.clientPassword}
+              defaultValue={client.client_password}
               className="col-span-3"
             />
           </div>

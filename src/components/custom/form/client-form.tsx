@@ -19,7 +19,6 @@ import { useFormStatus } from "react-dom"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { useFormState } from "react-dom"
 import { addClientData } from "@/actions/addClientData"
-// import { useRef } from "react"
 import {schema} from "../../../types/client-schema"
 
 
@@ -49,15 +48,17 @@ export function ClientForm() {
     resolver: zodResolver(schema),
     defaultValues: {
       labName: "",
-      clientName: "",
-      clientHostName: "",
+      descriptionName: "",
+      ethernetIP: "",
       hostPort: "",
-      interfaceNumber: "",
+      interfaceName: "",
       adminUsername: "",
       adminPassword: "",
     },
   })
   // const formRef = useRef<HTMLFormElement>(null);
+  // django admin db creds -  vibhav.1507@
+  // vibhavtest
 
   function onSubmit(values: z.infer<typeof schema>) {
     // Do something with the form values.
@@ -76,44 +77,16 @@ export function ClientForm() {
       <Form {...form} >
         <form 
           onSubmit={form.handleSubmit(onSubmit)}
-          className=" mt-4   flex flex-row" >
+          className=" mt-4 flex flex-row" >
           <div  className="gap-x-4 flex flex-row  items-end justify-between mb-2 ">
           {/* style={{background:"blue"}} */}
             <div>
               <FormField
-                control={form.control}
-                name="labName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Lab Name</FormLabel>
-                    <FormControl>
-                      <Input 
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          e.preventDefault();
-                          // Focus on the next input field
-                          const nextInput = document.querySelector<HTMLInputElement>(
-                            '[name="clientName"]'
-                          );
-                          if (nextInput) {
-                            nextInput.focus();
-                          }
-                        }
-                      }}
-                      placeholder="placeholder..." {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            
-            <FormField
               control={form.control}
-              name="clientName"
+              name="labName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Client Name</FormLabel>
+                  <FormLabel className="ml-1" >Lab</FormLabel>
                   <FormControl>
                     <Input
                     onKeyDown={(e) => {
@@ -121,7 +94,37 @@ export function ClientForm() {
                         e.preventDefault();
                         // Focus on the next input field
                         const nextInput = document.querySelector<HTMLInputElement>(
-                          '[name="clientHostName"]'
+                          '[name="descriptionName"]'
+                        );
+                        console.log(nextInput)
+                        if (nextInput) {
+                          nextInput.focus();
+                        }
+                      }
+                    }}
+                    
+                     placeholder="placeholder..." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            </div>
+            
+            <FormField
+              control={form.control}
+              name="descriptionName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="ml-1" >Description</FormLabel>
+                  <FormControl>
+                    <Input
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        // Focus on the next input field
+                        const nextInput = document.querySelector<HTMLInputElement>(
+                          '[name="ethernetIP"]'
                         );
                         if (nextInput) {
                           nextInput.focus();
@@ -137,10 +140,10 @@ export function ClientForm() {
             />
             <FormField
               control={form.control}
-              name="clientHostName"
+              name="ethernetIP"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Client IP</FormLabel>
+                  <FormLabel className="ml-1" >Ethernet IP</FormLabel>
                   <FormControl>
                     <Input 
                     onKeyDown={(e) => {
@@ -167,7 +170,7 @@ export function ClientForm() {
               name="hostPort"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Host Port</FormLabel>
+                  <FormLabel className="ml-1" >Port</FormLabel>
                   <FormControl>
                     <Input 
                     onKeyDown={(e) => {
@@ -175,7 +178,7 @@ export function ClientForm() {
                         e.preventDefault();
                         // Focus on the next input field
                         const nextInput = document.querySelector<HTMLInputElement>(
-                          '[name="adminUsername"]'
+                          '[name="interfaceName"]'
                         );
                         if (nextInput) {
                           nextInput.focus();
@@ -190,10 +193,10 @@ export function ClientForm() {
             />
             <FormField
               control={form.control}
-              name="interfaceNumber"
+              name="interfaceName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Interface</FormLabel>
+                  <FormLabel className="ml-1" >Interface</FormLabel>
                   <FormControl>
                     <Input 
                     onKeyDown={(e) => {
@@ -219,9 +222,9 @@ export function ClientForm() {
               name="adminUsername"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Admin Username</FormLabel>
+                  <FormLabel className="ml-1" >Username</FormLabel>
                   <FormControl>
-                    <Input 
+                    <Input  
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
                         e.preventDefault();
@@ -245,7 +248,7 @@ export function ClientForm() {
               name="adminPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Admin Password</FormLabel>
+                  <FormLabel className="ml-1" >Password</FormLabel>
                   <FormControl>
                     <Input placeholder="placeholder..." {...field} />
                   </FormControl>

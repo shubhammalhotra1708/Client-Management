@@ -20,9 +20,10 @@ export async function getClientData(): Promise<TClient[]> {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const data: TClient[] = await response.json();
+        const data: TDataAll[] = await response.json();
+        // console.log(data);
 
-        filteredData = data.map((user: TClient) => {
+        filteredData = data.map((user: TDataAll) => {
             const filteredUser = Object.fromEntries(
                 Object.entries(user)
                     .filter(([key]) => key !== 'user' && key !== 'created_at' && key !== 'updated_at')

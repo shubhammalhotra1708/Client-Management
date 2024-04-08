@@ -1,51 +1,56 @@
-// export type TClient = {
-//     id:number,
-//     clientName: string;
-//     clientIP: string;
-//     clientPort: string;
-//     clientUsername: string;
-//     clientPassword?: string;
-//     clientLab: string;
-//     description: string;
-    
-// };
 export type TDataAll = {
-    id: number,
-    traffic_profile: string,
-    created_at: string,
-    updated_at: string,
-    user: number,
-    clientName: string;
-    clientIP: string;
-    clientPort: string;
-    clientUsername: string;
-    clientPassword?: string;
-    clientLab?: string;
-    description?: string;
-};
-
-export type TClient = {
     id: number;
-    clientName: string;
-    clientIP: string;
-    clientPort: number;
-    clientUsername: string;
-    clientPassword: string;
-    clientLab: string;
+    hostname?: string;
+    ethernet_ip: string;
+    client_port: number;
+    client_username: string;
+    client_password: string;
+    client_lab: string;
     traffic_profile: string;
     description: string;
-    interface: string;
-    ssidname: string | null;
+    interface_name: string;
+    ssid_name: string | null;
     bssid: string | null;
     hwaddr: string | null;
     rssi: number | null;
     txpower: number | null;
     channel: number | null;
-    channelwidth: string | null;
-    channelband: string | null;
+    channel_width: string | null;
+    channel_band: string | null;
     security: string | null;
     phymode: string | null;
     phyrate: number | null;
-    noisemeasurement: number | null;
-    status: boolean;
+    noise_measurement: number | null;
+    wifi_status: string;
+    ethernet_status: boolean;
+    created_at : string;
+    updated_at : string;
+    user: number;
+};
+
+export type TClient = {
+    hostname?:string;
+    id: number;
+    ethernet_ip: string;
+    client_port: number;
+    client_username: string;
+    client_password: string;
+    client_lab: string;
+    traffic_profile: string;
+    description: string;
+    interface_name: string;
+    ssid_name: string | null;
+    bssid: string | null;
+    hwaddr: string | null;
+    rssi: number | null;
+    txpower: number | null;
+    channel: number | null;
+    channel_width: string | null;
+    channel_band: string | null;
+    security: string | null;
+    phymode: string | null;
+    phyrate: number | null;
+    noise_measurement: number | null;
+    wifi_status: string;
+    ethernet_status: boolean;
 }

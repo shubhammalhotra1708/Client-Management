@@ -45,24 +45,25 @@ export async function addClientData(
   // Hardcoded values
   const user = 1;
   // const interfaceVal = "en0";
-  const description = "Test description";
+  // const description = "Test description";
   const trafficProfile = "SampleProfile";
 
   // Create the body object
   const bd = {
     "user": user,
-    "clientName": `${data.clientName}`, // Remove quotation marks
-    "clientIP": `${data.clientHostName}`, // Remove quotation marks
-    "clientPort": data.hostPort, // Keep it as string
-    "clientUsername": `${data.adminUsername}`, // Remove quotation marks
-    "clientPassword": `${data.adminPassword}`, // Remove quotation marks
-    "clientLab": `${data.labName}`, // Remove quotation marks
+    "ethernet_ip": `${data.ethernetIP}`, 
+    "client_port": data.hostPort, 
+    "client_username": `${data.adminUsername}`,
+    "client_password": `${data.adminPassword}`, 
+    "client_lab": `${data.labName}`, 
     "traffic_profile": trafficProfile,
-    "description": description,
-    "interface": `${data.interfaceNumber}`,
+    "description": `${data.descriptionName}`, 
+    "interface_name": `${data.interfaceName}`,
   };
 
 console.log(JSON.stringify(bd));
+
+
 // const response = await fetch(`${baseUrl}/manage/clients`, {
 //   headers: {
 //     'Authorization': `Bearer ${token}`

@@ -24,7 +24,7 @@ export function DeleteClient({client} : {client: TClient}) {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure you want to delete your client {client.clientName} ?</AlertDialogTitle>
+          <AlertDialogTitle>Are you sure you want to delete your client {client.ethernet_ip} ?</AlertDialogTitle>
           <AlertDialogDescription>
             This action will permanently delete your
             client and remove your data from our servers.

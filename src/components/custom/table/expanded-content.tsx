@@ -2,31 +2,41 @@ import {
   TableCell,
   TableRow,
 } from "@/components/ui/table"
+import { hostname } from "os";
 
 const ExpandedContent: React.FC<any> = (details) => {
   // console.log("hi")
   // console.log(details);
   // console.log(`client ${details.details.id}`)
-  const excludeFields = ['status', 'clientIP', 'id', 'clientPort' , 'clientName', 'clientLab', 'ssidname' , 'bssid'];
+  const excludeFields = ['status','wifi_ip', 'id', 'client_port' , 'client_lab', 'ssid_name' , 'bssid'];
 
   const labelsMapping: { [key: string]: string } = {
     // Map the field to the label which is displayed in the ui
     traffic_profile: 'Traffic Profile',
-    clientName: 'Client Name',
-    clientUsername: 'Username',
-    clientPassword: 'Password',
+    ethernet_ip: 'Ethernet IP',
+    ethernet_status: 'Ethernet Status',
+    client_username: 'Username',
+    client_password: 'Password',
     description: 'Description',
-    interface: 'Interface',
+    interface_name: 'Interface',
     hwaddr: 'MAC Address',
     rssi: 'RSSI',
     txpower: 'TX Power',
     channel: 'Channel',
-    channelwidth: 'Channel Width',
-    channelband: 'Band',
+    channel_width: 'Channel Width',
+    channel_band: 'Band',
     security: 'Security',
     phymode: 'PHY Mode',
     phyrate: 'PHY Rate',
-    noisemeasurement: 'Noise Measurement',
+    noise_measurement: 'Noise Measurement',
+    wifi_status: 'Wifi Status',
+    wifi_ip: 'Wifi IP',
+    operating_system: 'Operating System',
+    transmit_rate: 'Transmit Rate',
+    receive_rate: 'Receive Rate',
+    signal_quality: 'Signal Quality',
+    hostname: 'Hostname',
+    ipv6_address: 'IPv6 Address',
   };
   
   return (
