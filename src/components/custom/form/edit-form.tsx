@@ -13,6 +13,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import {
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog"
 import { X } from "lucide-react";
 import { Input } from "@/components/ui/input"
 import { useFormStatus } from "react-dom"
@@ -22,7 +26,7 @@ import { addClientData } from "@/actions/addClientData"
 import {schema} from "../../../types/client-schema"
 
 import { TClient } from "@/types/types"
-
+import { editClientData } from "@/actions/editClientData"
 
 // type FormSchema = z.infer<typeof schema>
 export default function EditForm({client} : {client: TClient}) {
@@ -50,7 +54,7 @@ export default function EditForm({client} : {client: TClient}) {
       labName: client.client_lab,
       descriptionName: client.description,
       ethernetIP: client.ethernet_ip,
-      hostPort:  client.client_port.toString(),
+      hostPort:  client.client_port,
       interfaceName: client.interface_name,
       adminUsername: client.client_username,
       adminPassword: client.client_password,
@@ -58,12 +62,12 @@ export default function EditForm({client} : {client: TClient}) {
   })
   // const formRef = useRef<HTMLFormElement>(null);
 
-  function onSubmit(values: z.infer<typeof schema>) {
+  function onSubmit(values: z.infer<typeof schema> ){
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
- 
-    form.reset();
-    addClientData(values);
+    console.log("dialog button press")
+    // form.reset();
+    editClientData(values);
   }
 
   // const [state, formAction] = useFormState(addClientData, {
@@ -250,6 +254,11 @@ export default function EditForm({client} : {client: TClient}) {
                 </FormItem>
               )}
             />
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button type="submit">Save changes</Button>
+              </DialogClose>
+            </DialogFooter>
         
         </form>
       </Form>

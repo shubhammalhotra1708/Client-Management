@@ -4,11 +4,6 @@ import {z} from "zod";
 import { TClient, TDataAll } from '@/types/types';
 import { revalidatePath } from "next/cache";
 import React from "react";
-// import { useToast } from "@/components/ui/use-toast"
-import { toast } from "sonner"
-import { AnyRecord } from "dns";
-
-
 
 
 const baseUrl = process.env.BASE_URL;
@@ -44,11 +39,12 @@ const token = process.env.TOKEN;
 //   return { message: "Client Added" };
 // }
 
-export async function addClientData(
+export async function editClientData(
   data:z.infer<typeof schema>
 ){
   // Hardcoded values
   const user = 1;
+  console.log(data)
   // const interfaceVal = "en0";
   // const description = "Test description";
   const trafficProfile = "SampleProfile";
@@ -57,41 +53,52 @@ export async function addClientData(
   const bd = {
     "user": user,
     "ethernet_ip": `${data.ethernetIP}`, 
-    "client_port": `${data.hostPort}`,
+    "client_port": data.hostPort, 
     "client_username": `${data.adminUsername}`,
     "client_password": `${data.adminPassword}`, 
     "client_lab": `${data.labName}`, 
     "traffic_profile": trafficProfile,
     "description": `${data.descriptionName}`, 
+    "id" : 10,
     "interface_name": `${data.interfaceName}`,
   };
+
 console.log(JSON.stringify(bd));
-// const { toast } = useToast()
+
+
+// const response = await fetch(`${baseUrl}/manage/clients`, {
+//   headers: {
+//     'Authorization': `Bearer ${token}`
+//   },
+//   method: 'POST',
+//   body: JSON.stringify(bd), // Convert bd object to JSON
+// });
+// if (!response.ok) {
+//     throw new Error(`HTTP error! Status: ${response.status}`);
+// }
+// const res = await response.json();
+// console.log(res);
+// revalidatePath('/payments');
+
   const settings = {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    method: 'POST',
+    method: 'PUT',
     body: JSON.stringify(bd),
   };
-    try {
-      const fetchResponse = await fetch(`${baseUrl}/manage/clients/`, settings);
-      // const res = await fetchResponse.json();
-      // console.log(res);
-      // toast("Client Added")
-      // revalidatePath("/")
+  try {
+      const fetchResponse = await fetch(`${baseUrl}/manage/clients/modify/`, settings);
       const res = await fetchResponse.json();
-      console.log(`res: ${res}`);
-      console.log(`fetchResponse.ok: ${fetchResponse.ok}`);
-      console.log(`fetchResponse.status: ${fetchResponse.status}`);
-
-      return {status: fetchResponse.ok, message: res.message}
-    } catch (e: any) {
+      console.log(res);
+      return {status: fetchResponse.status, message: res.message}
+      // return res;
+  } catch (e) {
       console.log(e);
-      // toast.error("error:")
-      return { message : e.message}
-    } 
+      return {message : "e"}
+
+  } 
 
 }

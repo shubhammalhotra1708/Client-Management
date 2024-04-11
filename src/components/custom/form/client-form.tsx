@@ -20,29 +20,29 @@ import { ReloadIcon } from "@radix-ui/react-icons"
 import { useFormState } from "react-dom"
 import { addClientData } from "@/actions/addClientData"
 import {schema} from "../../../types/client-schema"
+import { useEffect, useState } from "react"
 
+import { toast } from "@/components/ui/use-toast"
 
+import { revalidatePath } from "next/cache"
+import addFormAction from "@/actions/addFormAction"
 
-
-// type FormSchema = z.infer<typeof schema>
 export function ClientForm() {
-  //  function ButtonLoading() {
-//   return (
-//     <Button className="mt-8 mx-4" disabled>
-//       <ReloadIcon className=" mr-2 h-4 w-4 animate-spin " />
-//       Please wait
-//     </Button>
-//   )
-// }
-//   const {pending} = useFormStatus();
 
-//   const SubmitButton = () => {
-//     return (
-//       <Button type="submit" className="mt-8 mx-4" >
-//         Submit
-//       </Button>
-//     );
-//   }
+  const initialState = {
+    active: false,
+    status: false,
+    message: "",
+  }
+
+  const SubmitButton = () => {
+    const {pending} = useFormStatus();
+    return (
+      <Button aria-disabled={pending} disabled={pending} className="mt-6 mx-4" type="submit">
+        {pending ? <ReloadIcon className=" mx-4 h-4 w-4 animate-spin " /> : "Submit"}
+      </Button> 
+    );
+  }
  
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -50,33 +50,79 @@ export function ClientForm() {
       labName: "",
       descriptionName: "",
       ethernetIP: "",
-      hostPort: "",
+      hostPort: 8083,
       interfaceName: "",
       adminUsername: "",
       adminPassword: "",
     },
   })
-  // const formRef = useRef<HTMLFormElement>(null);
-  // django admin db creds -  vibhav.1507@
-  // vibhavtest
 
-  function onSubmit(values: z.infer<typeof schema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+  // async function onSubmit(values: z.infer<typeof schema>) {
+  //   // Do something with the form values.
+  //   // ✅ This will be type-safe and validated.
  
-    form.reset();
-    addClientData(values);
-  }
+  //   // form.reset();
+  //   // const mes:any= await addClientData(values);
+  //   // console.log(`mes: ${mes} ${mes.ok} ${mes.message}`)
 
-  // const [state, formAction] = useFormState(addClientData, {
-  //   message: "",
-  // });
+  //   // {mes.ok ? toast.error(mes.message) : toast.success(mes.message)}
+    
+  //   // {mes.ok ? toast({
+  //   //   title: mes.message,
+  //   //   description: "Client added successfully"}) : 
+  //   // toast({variant : "destructive",
+  //   //   title: mes.message,
+  //   //   description: "Make sure your client is reachable and has wifi-agent runnning on it."
+  //   // })
+  //   // }
+    
+  //   // {mes.ok ? revalidatePath("/") : console.log("error")}
+  //   toast({
+  //     title: "Client Added",
+  //     description: state.message,
+  //   })
+  // }
+
+  const [state, formAction] = useFormState(addFormAction, initialState);
+  // const formRef = useRef<HTMLFormElement>(null);
+  useEffect(()=>{
+    console.log(`active: ${state.active} in useffect`)
+    if(state.active == true){
+
+      if(state?.status == true){
+        if(state?.resStatus == 201){
+          toast({
+            title: "Client added successfully",
+            description: state.message,
+          })
+        }else{
+          toast({
+            title: "Error in adding client",
+            description: state.message,
+            variant : "destructive"
+          })
+        }
+      }else{
+        toast({
+          title: "Error in reaching wifi agent",
+          description: state.message,
+          variant : "destructive"
+        })
+      }
+    }
+
+  },[state])
+ 
+  
 
   return (
-    //style={{background:"red"}} action={}
+    <>
       <Form {...form} >
         <form 
-          onSubmit={form.handleSubmit(onSubmit)}
+          // onSubmit={form.handleSubmit(onSubmit)}
+          action={formAction}
+          // ref={formRef}
+          // onSubmit={form.handleSubmit(()=> formRef.current?.requestSubmit)}
           className=" mt-4 flex flex-row" >
           <div  className="gap-x-4 flex flex-row  items-end justify-between mb-2 ">
           {/* style={{background:"blue"}} */}
@@ -103,7 +149,7 @@ export function ClientForm() {
                       }
                     }}
                     
-                     placeholder="placeholder..." {...field} />
+                     placeholder="Pegasus" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -132,7 +178,7 @@ export function ClientForm() {
                       }
                     }}
                     
-                     placeholder="placeholder..." {...field} />
+                     placeholder="Test client" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -159,7 +205,7 @@ export function ClientForm() {
                       }
                     }}
                     //  required={false} 
-                     placeholder="placeholder..." {...field} />
+                     placeholder="10.87.10.200" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -173,6 +219,8 @@ export function ClientForm() {
                   <FormLabel className="ml-1" >Port</FormLabel>
                   <FormControl>
                     <Input 
+                    type="number"
+                    // { ...register('myNumberField', { valueAsNumber: true } ) } 
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
                         e.preventDefault();
@@ -185,7 +233,7 @@ export function ClientForm() {
                         }
                       }
                     }}
-                    placeholder="placeholder..." {...field} />
+                    placeholder="8083" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -211,7 +259,7 @@ export function ClientForm() {
                         }
                       }
                     }}
-                    placeholder="placeholder..." {...field} />
+                    placeholder="en1" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -237,7 +285,7 @@ export function ClientForm() {
                         }
                       }
                     }}
-                    placeholder="placeholder..." {...field} />
+                    placeholder="Pune-Lab" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -250,7 +298,7 @@ export function ClientForm() {
                 <FormItem>
                   <FormLabel className="ml-1" >Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="placeholder..." {...field} />
+                    <Input placeholder="Welcome" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -259,13 +307,21 @@ export function ClientForm() {
           </div>
           {/* className="bg-white" */}
           <div >
-            {/* <SubmitButton /> */}
-            <Button  className="mt-8 mx-4" type="submit">Submit</Button> 
+            <SubmitButton />
+            {/* <Button  className="mt-6 mx-4" type="submit">Submit</Button>  */}
             {/* {pending ? <ButtonLoading /> : <SubmitButton />} */}
           </div>
           {/* className="items-end py-4" */}
+          
         </form>
+          {/* {state?.message !== "" && (
+            <div className="text-red-500">
+              {state.message}
+            </div>
+          )} */}
       </Form>
+    </>
+
     
   )
 }

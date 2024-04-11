@@ -5,8 +5,7 @@ import { TClient, TDataAll } from '@/types/types';
 import { revalidatePath } from "next/cache";
 import React from "react";
 // import { useToast } from "@/components/ui/use-toast"
-import { toast } from "sonner"
-import { AnyRecord } from "dns";
+
 
 
 
@@ -44,10 +43,13 @@ const token = process.env.TOKEN;
 //   return { message: "Client Added" };
 // }
 
-export async function addClientData(
-  data:z.infer<typeof schema>
+async function addFormAction(
+  // data:z.infer<typeof schema>
+  prevState: any,
+  formData: FormData
 ){
   // Hardcoded values
+  const data= Object.fromEntries(formData);
   const user = 1;
   // const interfaceVal = "en0";
   // const description = "Test description";
@@ -83,15 +85,15 @@ console.log(JSON.stringify(bd));
       // toast("Client Added")
       // revalidatePath("/")
       const res = await fetchResponse.json();
-      console.log(`res: ${res}`);
+      console.log(`res: ${res.message}`);
       console.log(`fetchResponse.ok: ${fetchResponse.ok}`);
       console.log(`fetchResponse.status: ${fetchResponse.status}`);
-
-      return {status: fetchResponse.ok, message: res.message}
+      return {active:true,status: true, resStatus:fetchResponse.status, message: res.message}
     } catch (e: any) {
       console.log(e);
       // toast.error("error:")
-      return { message : e.message}
+      return {active:true, status: false,message : "error reaching api response - catch block"}
     } 
 
 }
+export default addFormAction;
