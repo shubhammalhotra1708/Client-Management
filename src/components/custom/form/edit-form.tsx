@@ -1,13 +1,12 @@
 "use client"
 
-import { any, z } from "zod"
+import {  z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,36 +16,19 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog"
-import { X } from "lucide-react";
 import { Input } from "@/components/ui/input"
-import { useFormStatus } from "react-dom"
-import { ReloadIcon } from "@radix-ui/react-icons"
 import { useFormState } from "react-dom"
-import { addClientData } from "@/actions/addClientData"
-import {schema} from "../../../types/client-schema"
+import { ReloadIcon } from "@radix-ui/react-icons"
+import { useEffect } from "react"
 
+import { toast } from "@/components/ui/use-toast"
+import {schema} from "../../../types/client-schema";
+
+import { revalidatePath } from "next/cache"
 import { TClient } from "@/types/types"
 import { editClientData } from "@/actions/editClientData"
 
-// type FormSchema = z.infer<typeof schema>
 export default function EditForm({client} : {client: TClient}) {
-  //  function ButtonLoading() {
-//   return (
-//     <Button className="mt-8 mx-4" disabled>
-//       <ReloadIcon className=" mr-2 h-4 w-4 animate-spin " />
-//       Please wait
-//     </Button>
-//   )
-// }
-//   const {pending} = useFormStatus();
-
-//   const SubmitButton = () => {
-//     return (
-//       <Button type="submit" className="mt-8 mx-4" >
-//         Submit
-//       </Button>
-//     );
-//   }
  
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -60,26 +42,47 @@ export default function EditForm({client} : {client: TClient}) {
       adminPassword: client.client_password,
     },
   })
-  // const formRef = useRef<HTMLFormElement>(null);
-
-  function onSubmit(values: z.infer<typeof schema> ){
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log("dialog button press")
-    // form.reset();
-    editClientData(values);
+  const initialState = {
+    active: false,
+    status: false,
+    message: "",
   }
 
-  // const [state, formAction] = useFormState(addClientData, {
-  //   message: "",
-  // });
+  const [state, formAction] = useFormState(editClientData, initialState);
+  useEffect(()=>{
+    console.log(`active: ${state.active} in useffect`)
+    if(state.active == true){
+
+      if(state?.status == true){
+        if(state?.resStatus == 201){
+          toast({
+            title: "Client edited successfully",
+            description: state.message,
+          })
+          revalidatePath("/")
+        }else{
+          toast({
+            title: "Error in editing client",
+            description: state.message,
+            variant : "destructive"
+          })
+        }
+      }else{
+        toast({
+          title: "Error in reaching wifi agent",
+          description: state.message,
+          variant : "destructive"
+        })
+      }
+    }
+
+  },[state])
 
   return (
-    //style={{background:"red"}} action={}
       <Form {...form} >
         <form 
-          onSubmit={form.handleSubmit(onSubmit)}>
-          {/* style={{background:"blue"}} */}
+         action={formAction}
+         >
               <FormField
               control={form.control}
               name="labName"

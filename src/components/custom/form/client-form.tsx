@@ -1,31 +1,28 @@
 "use client"
 
-import { any, z } from "zod"
+import {  z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { X } from "lucide-react";
 import { Input } from "@/components/ui/input"
 import { useFormStatus } from "react-dom"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { useFormState } from "react-dom"
-import { addClientData } from "@/actions/addClientData"
 import {schema} from "../../../types/client-schema"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 import { toast } from "@/components/ui/use-toast"
 
 import { revalidatePath } from "next/cache"
-import addFormAction from "@/actions/addFormAction"
+import addFormData from "@/actions/addFormData"
 
 export function ClientForm() {
 
@@ -57,34 +54,8 @@ export function ClientForm() {
     },
   })
 
-  // async function onSubmit(values: z.infer<typeof schema>) {
-  //   // Do something with the form values.
-  //   // ✅ This will be type-safe and validated.
- 
-  //   // form.reset();
-  //   // const mes:any= await addClientData(values);
-  //   // console.log(`mes: ${mes} ${mes.ok} ${mes.message}`)
 
-  //   // {mes.ok ? toast.error(mes.message) : toast.success(mes.message)}
-    
-  //   // {mes.ok ? toast({
-  //   //   title: mes.message,
-  //   //   description: "Client added successfully"}) : 
-  //   // toast({variant : "destructive",
-  //   //   title: mes.message,
-  //   //   description: "Make sure your client is reachable and has wifi-agent runnning on it."
-  //   // })
-  //   // }
-    
-  //   // {mes.ok ? revalidatePath("/") : console.log("error")}
-  //   toast({
-  //     title: "Client Added",
-  //     description: state.message,
-  //   })
-  // }
-
-  const [state, formAction] = useFormState(addFormAction, initialState);
-  // const formRef = useRef<HTMLFormElement>(null);
+  const [state, formAction] = useFormState(addFormData, initialState);
   useEffect(()=>{
     console.log(`active: ${state.active} in useffect`)
     if(state.active == true){
@@ -95,6 +66,7 @@ export function ClientForm() {
             title: "Client added successfully",
             description: state.message,
           })
+          revalidatePath("/")
         }else{
           toast({
             title: "Error in adding client",
@@ -308,17 +280,11 @@ export function ClientForm() {
           {/* className="bg-white" */}
           <div >
             <SubmitButton />
-            {/* <Button  className="mt-6 mx-4" type="submit">Submit</Button>  */}
-            {/* {pending ? <ButtonLoading /> : <SubmitButton />} */}
           </div>
           {/* className="items-end py-4" */}
           
         </form>
-          {/* {state?.message !== "" && (
-            <div className="text-red-500">
-              {state.message}
-            </div>
-          )} */}
+          
       </Form>
     </>
 

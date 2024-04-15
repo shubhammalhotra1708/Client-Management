@@ -1,19 +1,6 @@
 "use server"
-import {schema} from "../types/client-schema";
-import {z} from "zod";
-import { TClient, TDataAll } from '@/types/types';
-import { revalidatePath } from "next/cache";
-import React from "react";
-// import { useToast } from "@/components/ui/use-toast"
-import { toast } from "sonner"
-import { AnyRecord } from "dns";
-
-
-
-
 const baseUrl = process.env.BASE_URL;
 const token = process.env.TOKEN;
-
 // for server side validation of form data
 
 // export type FormState = {
@@ -44,13 +31,16 @@ const token = process.env.TOKEN;
 //   return { message: "Client Added" };
 // }
 
-export async function addClientData(
-  data:z.infer<typeof schema>
+async function addFormData(
+  // data:z.infer<typeof schema>
+  prevState: any,
+  formData: FormData
 ){
+  const data= Object.fromEntries(formData);
   // Hardcoded values
-  const user = 1;
   // const interfaceVal = "en0";
   // const description = "Test description";
+  const user = 1;
   const trafficProfile = "SampleProfile";
 
   // Create the body object
@@ -78,20 +68,15 @@ console.log(JSON.stringify(bd));
   };
     try {
       const fetchResponse = await fetch(`${baseUrl}/manage/clients/`, settings);
-      // const res = await fetchResponse.json();
-      // console.log(res);
-      // toast("Client Added")
-      // revalidatePath("/")
       const res = await fetchResponse.json();
-      console.log(`res: ${res}`);
+      console.log(`res: ${res.message}`);
       console.log(`fetchResponse.ok: ${fetchResponse.ok}`);
       console.log(`fetchResponse.status: ${fetchResponse.status}`);
-
-      return {status: fetchResponse.ok, message: res.message}
+      return {active:true,status: true, resStatus:fetchResponse.status, message: res.message}
     } catch (e: any) {
       console.log(e);
-      // toast.error("error:")
-      return { message : e.message}
+      return {active:true, status: false,message : "error reaching api response - catch block"}
     } 
 
 }
+export default addFormData;

@@ -5,9 +5,6 @@ import {
 import { hostname } from "os";
 
 const ExpandedContent: React.FC<any> = (details) => {
-  // console.log("hi")
-  // console.log(details);
-  // console.log(`client ${details.details.id}`)
   const excludeFields = ['status','wifi_ip', 'id', 'client_port' , 'client_lab', 'ssid_name' , 'bssid'];
 
   const labelsMapping: { [key: string]: string } = {

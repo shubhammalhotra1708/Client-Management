@@ -40,13 +40,15 @@ const token = process.env.TOKEN;
 // }
 
 export async function editClientData(
-  data:z.infer<typeof schema>
+  prevState: any,
+  formData: FormData
 ){
+  const data= Object.fromEntries(formData);
+
   // Hardcoded values
-  const user = 1;
-  console.log(data)
-  // const interfaceVal = "en0";
+    // const interfaceVal = "en0";
   // const description = "Test description";
+  const user = 1;
   const trafficProfile = "SampleProfile";
 
   // Create the body object
@@ -63,22 +65,7 @@ export async function editClientData(
     "interface_name": `${data.interfaceName}`,
   };
 
-console.log(JSON.stringify(bd));
-
-
-// const response = await fetch(`${baseUrl}/manage/clients`, {
-//   headers: {
-//     'Authorization': `Bearer ${token}`
-//   },
-//   method: 'POST',
-//   body: JSON.stringify(bd), // Convert bd object to JSON
-// });
-// if (!response.ok) {
-//     throw new Error(`HTTP error! Status: ${response.status}`);
-// }
-// const res = await response.json();
-// console.log(res);
-// revalidatePath('/payments');
+  console.log(JSON.stringify(bd));
 
   const settings = {
     headers: {
@@ -92,12 +79,12 @@ console.log(JSON.stringify(bd));
   try {
       const fetchResponse = await fetch(`${baseUrl}/manage/clients/modify/`, settings);
       const res = await fetchResponse.json();
-      console.log(res);
-      return {status: fetchResponse.status, message: res.message}
-      // return res;
+      // console.log(res);
+      return {active:true,status: true, resStatus:fetchResponse.status, message: res.message}
   } catch (e) {
       console.log(e);
-      return {message : "e"}
+      return {active:true, status: false,message : "error reaching api response - catch block"}
+
 
   } 
 
