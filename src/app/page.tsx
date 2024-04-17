@@ -1,22 +1,31 @@
 import { columns } from "@/components/custom/table/columns"
 import { DataTable } from "@/components/custom/table/data-table"
-import {ModeToggle} from "@/components/theme/dark-mode"
-import { getClientData } from "@/actions/getClientData"
+import { ModeToggle } from "@/components/theme/dark-mode"
+import { getClientData } from "@/components/actions/getClientData"
 import { ClientForm } from "@/components/custom/form/client-form"
-import { SsidForm } from "@/components/custom/form/ssid-form"
+import { cookies } from 'next/headers'
+import { redirect } from "next/navigation"
+import { Logout } from "@/components/auth/logout"
 
 
 export default async function DemoPage() {
+  const session = cookies().get("session")?.value;
+  if (!session || session === "") {
+    redirect("/login")
+  }
+
   const data = await getClientData();
-  // console.log ( `data at page is ${data }`); 
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container  mx-auto py-10">
       {/* <SsidForm /> */}
-      <ModeToggle />
+      <div className="flex flex-row justify-between">
+        <ModeToggle />
+        <Logout />
+      </div>
+
       <ClientForm />
       <DataTable columns={columns} data={data} />
-      {/* <Example clientData={data} /> */}
     </div>
   )
 }

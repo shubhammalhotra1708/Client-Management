@@ -1,6 +1,10 @@
 "use server"
+
+import { revalidatePath } from "next/cache";
+
 const baseUrl = process.env.BASE_URL;
 const token = process.env.TOKEN;
+
 // for server side validation of form data
 
 // export type FormState = {
@@ -31,52 +35,44 @@ const token = process.env.TOKEN;
 //   return { message: "Client Added" };
 // }
 
-async function addFormData(
-  // data:z.infer<typeof schema>
+export async function deleteClientData(
+  clientID:number, 
   prevState: any,
   formData: FormData
 ){
-  const data= Object.fromEntries(formData);
-  // Hardcoded values
-  // const interfaceVal = "en0";
-  // const description = "Test description";
-  const user = 1;
-  const trafficProfile = "SampleProfile";
+ 
 
-  // Create the body object
   const bd = {
-    "user": user,
-    "ethernet_ip": `${data.ethernetIP}`, 
-    "client_port": `${data.hostPort}`,
-    "client_username": `${data.adminUsername}`,
-    "client_password": `${data.adminPassword}`, 
-    "client_lab": `${data.labName}`, 
-    "traffic_profile": trafficProfile,
-    "description": `${data.descriptionName}`, 
-    "interface_name": `${data.interfaceName}`,
+    "id" : `[${clientID}]`
   };
-console.log(JSON.stringify(bd));
-// const { toast } = useToast()
+
+  console.log(JSON.stringify(bd));
+
   const settings = {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    method: 'POST',
+    method: 'DELETE',
     body: JSON.stringify(bd),
   };
-    try {
-      const fetchResponse = await fetch(`${baseUrl}/manage/clients/`, settings);
-      const res = await fetchResponse.json();
-      console.log(`res: ${res.message}`);
-      console.log(`fetchResponse.ok: ${fetchResponse.ok}`);
-      console.log(`fetchResponse.status: ${fetchResponse.status}`);
-      return {active:true,status: true, resStatus:fetchResponse.status, message: res.message}
-    } catch (e: any) {
+  try {
+      const fetchResponse = await fetch(`${baseUrl}/manage/clients/modify/`, settings);
+      // const res = await fetchResponse.json();
+      // console.log(res);
+      console.log(fetchResponse.status);
+      // console.log(fetchResponse.statusText);
+      console.log(fetchResponse.ok)
+      // console.log(res);
+      revalidatePath("/")
+
+      return {active:true,status: true, resStatus:fetchResponse.ok, message: "Client deleted successfully"}
+  } catch (e) {
       console.log(e);
       return {active:true, status: false,message : "error reaching api response - catch block"}
-    } 
+
+
+  } 
 
 }
-export default addFormData;

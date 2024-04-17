@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { useFormState } from "react-dom"
-import { ReloadIcon } from "@radix-ui/react-icons"
+// import { ReloadIcon } from "@radix-ui/react-icons"
 import { useEffect } from "react"
 
 import { toast } from "@/components/ui/use-toast"
@@ -26,7 +26,7 @@ import {schema} from "../../../types/client-schema";
 
 import { revalidatePath } from "next/cache"
 import { TClient } from "@/types/types"
-import { editClientData } from "@/actions/editClientData"
+import { editClientData } from "@/components/actions/editClientData"
 
 export default function EditForm({client} : {client: TClient}) {
  
@@ -50,7 +50,7 @@ export default function EditForm({client} : {client: TClient}) {
 
   const [state, formAction] = useFormState(editClientData, initialState);
   useEffect(()=>{
-    console.log(`active: ${state.active} in useffect`)
+    // console.log(`active: ${state.active} in useffect`)
     if(state.active == true){
 
       if(state?.status == true){

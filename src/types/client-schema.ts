@@ -9,3 +9,18 @@ export const schema = z.object({
   adminUsername: z.string().trim().min(1),
   // id: z.string().trim(),
 });
+export const idSchema = z.object({
+  id: z.number().int().positive(),
+});
+export const emptySchema = z.object({
+  // random: z.string().trim(),
+});
+export const loginSchema = z.object({
+  emailLogin : z.string().email(),
+  passwordLogin : z.string().min(6),
+});
+export const signupSchema = z.object({
+  emailLogin : z.string().email(),
+  passwordLogin : z.string().min(6),
+  full_name : z.string().min(1),
+});

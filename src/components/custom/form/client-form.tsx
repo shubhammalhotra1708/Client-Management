@@ -22,7 +22,9 @@ import { useEffect } from "react"
 import { toast } from "@/components/ui/use-toast"
 
 import { revalidatePath } from "next/cache"
-import addFormData from "@/actions/addFormData"
+import addClientData from "@/components/actions/addClientData"
+import { Icons } from "@/components/ui/icons"
+
 
 export function ClientForm() {
 
@@ -36,7 +38,7 @@ export function ClientForm() {
     const {pending} = useFormStatus();
     return (
       <Button aria-disabled={pending} disabled={pending} className="mt-6 mx-4" type="submit">
-        {pending ? <ReloadIcon className=" mx-4 h-4 w-4 animate-spin " /> : "Submit"}
+        {pending ? <Icons.spinner className=" mx-4 mr-2 h-4 w-4 animate-spin " /> : "Submit"}
       </Button> 
     );
   }
@@ -55,7 +57,7 @@ export function ClientForm() {
   })
 
 
-  const [state, formAction] = useFormState(addFormData, initialState);
+  const [state, formAction] = useFormState(addClientData, initialState);
   useEffect(()=>{
     console.log(`active: ${state.active} in useffect`)
     if(state.active == true){
