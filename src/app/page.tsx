@@ -5,7 +5,9 @@ import { getClientData } from "@/components/actions/getClientData"
 import { ClientForm } from "@/components/custom/form/client-form"
 import { cookies } from 'next/headers'
 import { redirect } from "next/navigation"
-import { Logout } from "@/components/auth/logout"
+import { LogoutComp } from "@/components/auth/logout"
+import { logout } from "@/components/auth/loginActions";
+
 
 
 export default async function DemoPage() {
@@ -21,7 +23,7 @@ export default async function DemoPage() {
       {/* <SsidForm /> */}
       <div className="flex flex-row justify-between">
         <ModeToggle />
-        <Logout />
+        <LogoutComp logout={logout}/>
       </div>
 
       <ClientForm />

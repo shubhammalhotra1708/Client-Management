@@ -1,12 +1,10 @@
 "use client"
 
 import * as React from "react"
-
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/ui/icons"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { useFormState } from "react-dom"
 import { useEffect } from "react"
 import {
@@ -17,16 +15,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-
 import { toast } from "@/components/ui/use-toast"
 import { loginSchema } from "../../types/client-schema";
-import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useFormStatus } from "react-dom"
-import { ReloadIcon } from "@radix-ui/react-icons"
 
 
 export interface LoginProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -128,7 +123,7 @@ export function LoginForm({ className, login, ...props }: LoginProps) {
                   <FormLabel className="ml-1" >Password</FormLabel>
                   <FormControl>
                     <Input
-                      // type="password"
+                      type="password"
                       // disabled={isLoading}
                       {...field} />
                   </FormControl>

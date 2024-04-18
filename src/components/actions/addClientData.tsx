@@ -1,4 +1,8 @@
 "use server"
+
+import { cookies } from "next/headers";
+import { getSession, getUser } from "../auth/loginActions";
+
 const baseUrl = process.env.BASE_URL;
 const token = process.env.TOKEN;
 // for server side validation of form data
@@ -40,12 +44,16 @@ async function addClientData(
   // Hardcoded values
   // const interfaceVal = "en0";
   // const description = "Test description";
-  const user = 1;
+  // const user=1;
+  const user = await getUser();
+  console.log(`id is ${user.user.id}`)
+  const session = await getSession();
+
   const trafficProfile = "SampleProfile";
 
   // Create the body object
   const bd = {
-    "user": user,
+    "user": `${user.user.id}`,
     "ethernet_ip": `${data.ethernetIP}`, 
     "client_port": `${data.hostPort}`,
     "client_username": `${data.adminUsername}`,

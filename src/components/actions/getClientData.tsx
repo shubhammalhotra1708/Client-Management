@@ -1,17 +1,20 @@
 "use server"
 import { TClient, TDataAll } from '@/types/types';
+import { getSession } from '../auth/loginActions';
+import { cookies } from 'next/headers';
 
 const baseUrl = process.env.BASE_URL;
-const token = process.env.TOKEN;
+// const token = process.env.TOKEN;
 
 export async function getClientData(): Promise<TClient[]> {
     let filteredData: TClient[] = [];
-
+    const session = await getSession();
+    console.log(`token is ${session.token}`)
     try {
         const response = await fetch(`${baseUrl}/manage/clients`, {
             cache: 'no-store' ,
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${session.token}`
             }
         });
         // console.log(`${baseUrl}/manage/clients`)

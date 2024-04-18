@@ -128,6 +128,7 @@ export function SignupForm({ className, signup, ...props }: SignupProps) {
                 <FormLabel className="ml-1" >Password</FormLabel>
                 <FormControl>
                   <Input
+                  type="password"
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
                         e.preventDefault();
@@ -165,7 +166,7 @@ export function SignupForm({ className, signup, ...props }: SignupProps) {
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            Log In with Email
+            Sign In with Email
           </Button>
           </div>
         </form>

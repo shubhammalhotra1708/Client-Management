@@ -2,5 +2,6 @@ import { NextRequest } from "next/server";
 import { updateSession } from "@/components/auth/loginActions";
 
 export async function middleware(request: NextRequest) {
-  return await updateSession(request);
+  // return await updateSession(request);
+  return;
 }
