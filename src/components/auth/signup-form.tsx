@@ -173,7 +173,7 @@ export function SignupForm({ className, signup, ...props }: SignupProps) {
       </Form>
 
       {/* github or alt login options */}
-      <div className="relative">
+      {/* <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
         </div>
@@ -190,7 +190,7 @@ export function SignupForm({ className, signup, ...props }: SignupProps) {
           <Icons.gitHub className="mr-2 h-4 w-4" />
         )}{" "}
         GitHub
-      </Button>
+      </Button> */}
     </div>
 
 
