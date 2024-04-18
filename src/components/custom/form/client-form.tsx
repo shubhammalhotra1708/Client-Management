@@ -17,7 +17,7 @@ import { useFormStatus } from "react-dom"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { useFormState } from "react-dom"
 import {schema} from "../../../types/client-schema"
-import { useEffect } from "react"
+import { createRef, useEffect } from "react"
 
 import { toast } from "@/components/ui/use-toast"
 
@@ -33,11 +33,12 @@ export function ClientForm() {
     status: false,
     message: "",
   }
+  const ref = createRef<HTMLFormElement>();
 
   const SubmitButton = () => {
     const {pending} = useFormStatus();
     return (
-      <Button aria-disabled={pending} disabled={pending} className="mt-6 mx-4" type="submit">
+      <Button aria-disabled={pending} disabled={pending} className="mt-6 mx-4" >
         {pending ? <Icons.spinner className=" mx-4 mr-2 h-4 w-4 animate-spin " /> : "Submit"}
       </Button> 
     );
@@ -56,7 +57,17 @@ export function ClientForm() {
     },
   })
 
-
+  const clearForm = () => {
+    form.reset({
+      labName: "",
+      descriptionName: "",
+      ethernetIP: "",
+      hostPort: 8083,
+      interfaceName: "",
+      adminUsername: "",
+      adminPassword: "",
+    })
+  }
   const [state, formAction] = useFormState(addClientData, initialState);
   useEffect(()=>{
     console.log(`active: ${state.active} in useffect`)
@@ -68,11 +79,13 @@ export function ClientForm() {
             title: "Client added successfully",
             description: state.message,
           })
-          revalidatePath("/")
-        }else{
+          clearForm()
+          // ref.current?.reset()
+          // state=initialState
+        }else if (state?.resStatus == 400){
           toast({
             title: "Error in adding client",
-            description: state.message,
+            description: state.message ? state.message.non_field_errors[0]  : "Bad request",
             variant : "destructive"
           })
         }
@@ -95,6 +108,7 @@ export function ClientForm() {
         <form 
           // onSubmit={form.handleSubmit(onSubmit)}
           action={formAction}
+          ref={ref}
           // ref={formRef}
           // onSubmit={form.handleSubmit(()=> formRef.current?.requestSubmit)}
           className=" mt-4 flex flex-row" >

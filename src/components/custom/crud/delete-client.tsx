@@ -57,7 +57,8 @@ export function DeleteClient({ client }: { client: TClient }) {
         } else {
           toast({
             title: "Error in deleting client",
-            description: state.message,
+            description: state.message ? state.message  : "Bad request",
+
             variant: "destructive"
           })
         }

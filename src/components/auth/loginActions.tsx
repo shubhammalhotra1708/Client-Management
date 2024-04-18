@@ -1,7 +1,6 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { revalidatePath } from "next/cache"
 
 
 const secretKey = process.env.SECRET
@@ -86,7 +85,6 @@ export async function login(
   };
 
   console.log(`hi ${JSON.stringify(bd)}`)
-  const baseUrl = process.env.BASE_URL;
   const settings = {
     headers: {
       'Accept': 'application/json',
@@ -123,7 +121,7 @@ export async function logout() {
   "use server"
   const session = await getSession();
   const token = session.token;  
-  console.log(`logout tokein is ${token}`)
+  // console.log(`logout token is ${token}`)
   const settings = {
     headers: {
       'Accept': 'application/json',

@@ -63,7 +63,7 @@ export default function EditForm({client} : {client: TClient}) {
         }else{
           toast({
             title: "Error in editing client",
-            description: state.message,
+            description: state.message ? state.message.non_field_errors[0]  : "Bad request",
             variant : "destructive"
           })
         }

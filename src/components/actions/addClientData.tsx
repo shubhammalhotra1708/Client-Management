@@ -1,10 +1,9 @@
 "use server"
 
-import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 import { getSession, getUser } from "../auth/loginActions";
 
 const baseUrl = process.env.BASE_URL;
-const token = process.env.TOKEN;
 // for server side validation of form data
 
 // export type FormState = {
@@ -36,24 +35,20 @@ const token = process.env.TOKEN;
 // }
 
 async function addClientData(
-  // data:z.infer<typeof schema>
   prevState: any,
   formData: FormData
 ){
   const data= Object.fromEntries(formData);
-  // Hardcoded values
-  // const interfaceVal = "en0";
-  // const description = "Test description";
-  // const user=1;
-  const user = await getUser();
-  console.log(`id is ${user.user.id}`)
+  const usr = await getUser();
+  const user = usr.user.id
+  console.log(`id is ${user}`)
   const session = await getSession();
 
   const trafficProfile = "SampleProfile";
 
   // Create the body object
   const bd = {
-    "user": `${user.user.id}`,
+    "user": `${user}`,
     "ethernet_ip": `${data.ethernetIP}`, 
     "client_port": `${data.hostPort}`,
     "client_username": `${data.adminUsername}`,
@@ -63,11 +58,11 @@ async function addClientData(
     "description": `${data.descriptionName}`, 
     "interface_name": `${data.interfaceName}`,
   };
-console.log(JSON.stringify(bd));
+  console.log(JSON.stringify(bd));
 // const { toast } = useToast()
   const settings = {
     headers: {
-      'Authorization': `Bearer ${token}`,
+      'Authorization': `Bearer ${session.token}`,
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
@@ -75,11 +70,14 @@ console.log(JSON.stringify(bd));
     body: JSON.stringify(bd),
   };
     try {
+      console.log(`token in add is ${session.token}`)
       const fetchResponse = await fetch(`${baseUrl}/manage/clients/`, settings);
       const res = await fetchResponse.json();
       console.log(`res: ${res.message}`);
       console.log(`fetchResponse.ok: ${fetchResponse.ok}`);
       console.log(`fetchResponse.status: ${fetchResponse.status}`);
+      revalidatePath("/")
+      // console.log(res.message.non_field_errors);
       return {active:true,status: true, resStatus:fetchResponse.status, message: res.message}
     } catch (e: any) {
       console.log(e);

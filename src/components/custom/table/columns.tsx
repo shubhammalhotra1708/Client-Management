@@ -13,6 +13,7 @@ import { CollapsibleTrigger } from "@/components/ui/collapsible"
 import { CaretDownIcon, CaretUpIcon } from "@radix-ui/react-icons"
 import { MdOutlineWifi } from "react-icons/md";
 import { BsEthernet } from "react-icons/bs";
+import { ShowGraph } from "../graph/show-graph"
 
 import { TClient } from "@/types/types"
 import {
@@ -27,7 +28,6 @@ export const columns: ColumnDef<TClient>[] = [
     // row selection and expansion column
     id: "select",
     header: ({ table }) => (
-      <>
         <Checkbox
           checked={
             table.getIsAllPageRowsSelected() ||
@@ -36,38 +36,34 @@ export const columns: ColumnDef<TClient>[] = [
           onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
           aria-label="Select all"
         />
-        <Button
-          {...{
-            onClick: table.getToggleAllRowsExpandedHandler(),
-          }}
-          variant="ghost"
-          size="sm"
-        >
-          {table.getIsAllRowsExpanded() ? <CaretUpIcon /> : <CaretDownIcon />}
-        </Button>{' '}
-      </>
-
+        // <Button
+        //   {...{
+        //     onClick: table.getToggleAllRowsExpandedHandler(),
+        //   }}
+        //   variant="ghost"
+        //   size="sm"
+        // >
+        //   {table.getIsAllRowsExpanded() ? <CaretUpIcon /> : <CaretDownIcon />}
+        // </Button>{' '}
     ),
 
     cell: ({ row }) => (
+ 
       <div
-        style={{
-          paddingLeft: `${row.depth * 2}rem`,
-        }}
+        className="grid grid-cols-2 items-center justify-center"
       >
-        <div>
           <Checkbox
             checked={row.getIsSelected()}
             onCheckedChange={(value) => row.toggleSelected(!!value)}
             aria-label="Select row"
+            // className="-mr-4"
           />
           {/* expand rows  */}
           <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="sm">
-              <CaretDownIcon className="h-4 w-4" />
+            <Button variant="ghost" size="icon" className="-ml-2" >
+              <CaretDownIcon className="h-18 w-10" />
             </Button>
           </CollapsibleTrigger>
-        </div>
       </div>
 
     ),
@@ -92,10 +88,18 @@ export const columns: ColumnDef<TClient>[] = [
     },
   },
   {
-    accessorKey: "wifi_ip",
+    accessorKey: "operating_system",
     header: ({ column }) => {
       return (
-        <DataTableColumnHeader column={column} title="Wifi IP" />
+        <DataTableColumnHeader column={column} title="OS" />
+      )
+    },
+  },
+  {
+    accessorKey: "hwaddr",
+    header: ({ column }) => {
+      return (
+        <DataTableColumnHeader column={column} title="MAC" />
       )
     },
   },
@@ -108,12 +112,12 @@ export const columns: ColumnDef<TClient>[] = [
     },
     cell: ({ row }) => {
       return (
-        <div className="flex flex-row justify-start  items-center">
+        <div className="flex flex-row  justify-start  items-center">
           {row.original.ethernet_status ? (
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <BsEthernet className="ml-1" color="green" size={15} />
+                  <BsEthernet className="ml-3" color="green" size={15} />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Ethernet Status</p>
@@ -126,7 +130,7 @@ export const columns: ColumnDef<TClient>[] = [
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <BsEthernet className="ml-1" color="red" size={15} />
+                  <BsEthernet className="ml-3" color="red" size={15} />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Ethernet Status</p>
@@ -183,13 +187,31 @@ export const columns: ColumnDef<TClient>[] = [
     },
   },
   {
+    accessorKey: "rssi",
+    header: ({ column }) => {
+      return (
+        <DataTableColumnHeader column={column} title="RSSI" />
+      )
+    },
+  },
+  {
+    accessorKey: "wifi_ip",
+    header: ({ column }) => {
+      return (
+        <DataTableColumnHeader column={column} title="IPv4" />
+      )
+    },
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
       const client = row.original
       return (
         <div className="flex flex-row">
+          <ShowGraph />
           <EditClient client={client} />
           <DeleteClient client={client} />
+
         </div>
       )
     },

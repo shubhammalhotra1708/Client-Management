@@ -6,7 +6,8 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { getSession, login } from "@/components/auth/loginActions";
-import logo from "./logo.png"
+import logo from "@/../public/logo.png"
+
 
 
 export const metadata: Metadata = {

@@ -5,7 +5,7 @@ import {
 import { hostname } from "os";
 
 const ExpandedContent: React.FC<any> = (details) => {
-  const excludeFields = ['status','wifi_ip', 'id', 'client_port' , 'client_lab', 'ssid_name' , 'bssid'];
+  const excludeFields = ['status','wifi_ip','hwaddr','rssi','operating_system' ,  'id', 'client_port' , 'client_lab', 'ssid_name' , 'bssid'];
 
   const labelsMapping: { [key: string]: string } = {
     // Map the field to the label which is displayed in the ui
@@ -39,13 +39,13 @@ const ExpandedContent: React.FC<any> = (details) => {
   return (
     <>
       <TableRow>
-        <TableCell style={{alignItems:"center"}} colSpan={8}>
-          <div style={{display:'grid', gridTemplateColumns:'auto auto auto auto auto ', padding:'10px',rowGap:'20px'}}>
+        <TableCell style={{alignItems:"center"}}  colSpan={12}>
+          <div className="ml-7" style={{display:'grid', width:"100%" ,gridTemplateColumns:'auto auto auto auto auto ', padding:'10px',rowGap:'20px'}}>
             {Object.entries(details.details).map(([key, value]) => (
               // Check if the field is not in the exclude list
               excludeFields.includes(key) ? null : (
               
-              <div style={{width:'150px' , height: '60px'}} key={key}>
+              <div style={{width:'100%' , height: '60px'}} key={key}>
                 <div style={{whiteSpace: 'balance'}}><strong>{labelsMapping[key] ?? key}:</strong></div>
                 <div>
                 {!value ? '' : (value as string).toString()}
