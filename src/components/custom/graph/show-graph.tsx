@@ -1,34 +1,17 @@
+"use client"
 import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { GetGraph } from "./getGraph"
-export const ShowGraph =  () => {
+import { SiSpeedtest } from "react-icons/si";
+import { TClient } from "@/types/types"
+import Link from "next/link";
+export const ShowGraph = ({ client }: { client: TClient }) => {
+  const clientID = client.id
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">
-          Graph
+    <div>
+      <Link href={`/speedtest/${clientID}`}>
+        <Button variant="ghost">
+          <SiSpeedtest size={16} />
         </Button>
-      </DialogTrigger>
-      {/* width of dialog box */}
-      <DialogContent className="sm:max-w-[900px] h-auto">
-        <DialogHeader>
-          <DialogTitle>Speed Test Results</DialogTitle>
-          {/* <DialogDescription>
-            Here are the results of speedtests run on the client.
-          </DialogDescription> */}
-        </DialogHeader>
-
-        <GetGraph />
-          
-      </DialogContent>
-    </Dialog>
+      </Link>
+    </div>
   )
 }

@@ -72,6 +72,7 @@ async function addClientData(
     try {
       console.log(`token in add is ${session.token}`)
       const fetchResponse = await fetch(`${baseUrl}/manage/clients/`, settings);
+      console.log(` POST ${baseUrl}/manage/clients/`)
       const res = await fetchResponse.json();
       console.log(`res: ${res.message}`);
       console.log(`fetchResponse.ok: ${fetchResponse.ok}`);

@@ -21,8 +21,8 @@ export const LogoutComp = ({ className, logout, ...props }: LogoutProps) => {
   const SubmitButton = () => {
     const { pending } = useFormStatus();
     return (
-      <Button aria-disabled={pending} disabled={pending} className="mx-4" type="submit">
-        {pending ? <Icons.spinner className="mr-2 h-4 w-3 animate-spin" /> : "Log out"}
+      <Button aria-disabled={pending} variant="outline" disabled={pending} className="mx-4" type="submit">
+        {pending ? <Icons.spinner className="mr-2 h-4 w-4 animate-spin" /> : "Log out"}
       </Button>
     );
   }

@@ -1,7 +1,6 @@
 "use server"
 import { TClient, TDataAll } from '@/types/types';
 import { getSession } from '../auth/loginActions';
-import { cookies } from 'next/headers';
 
 const baseUrl = process.env.BASE_URL;
 

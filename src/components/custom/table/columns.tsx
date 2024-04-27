@@ -208,7 +208,7 @@ export const columns: ColumnDef<TClient>[] = [
       const client = row.original
       return (
         <div className="flex flex-row">
-          <ShowGraph />
+          <ShowGraph client={client}/>
           <EditClient client={client} />
           <DeleteClient client={client} />
 

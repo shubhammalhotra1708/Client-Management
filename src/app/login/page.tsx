@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function Login() {
   return (
     <>
-      <div className="container relative hidden h-[893px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-3 lg:px-0">
+      <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-3 lg:px-0">
         {/* container for top right button and text */}
         <div className="absolute right-20 top-20 md:right-12 md:top-12 flex flex-row">
           <p className="text-sm text-muted-foreground mt-2 mr-1">

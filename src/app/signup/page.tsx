@@ -1,18 +1,3 @@
-// import { getSession, login } from "@/components/auth/loginActions";
-// import { LoginForm } from "@/components/auth/login-form"
-// import { Logout } from "@/components/auth/logout";
-
-
-// export default async function Page() {
-//   const session = await getSession();
-//   return (
-//     <section>
-//       <LoginForm login={login} />
-//       <Logout />
-
-//     </section>
-//   );
-// }
 import { SignupForm } from "@/components/auth/signup-form"
 import { Metadata } from "next"
 import Link from "next/link"

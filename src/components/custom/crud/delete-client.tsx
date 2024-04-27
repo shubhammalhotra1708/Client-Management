@@ -16,7 +16,6 @@ import { TClient } from "@/types/types"
 import { deleteClientData } from "@/components/actions/deleteClientData";
 import { useFormState } from "react-dom";
 import { toast } from "@/components/ui/use-toast"
-import { revalidatePath } from "next/cache";
 import { useEffect } from "react";
 import {
   Form,
@@ -43,8 +42,6 @@ export function DeleteClient({ client }: { client: TClient }) {
   const deleteClientDataID = deleteClientData.bind(null, clientID)
   const [state, formAction] = useFormState(deleteClientDataID, initialState);
   useEffect(() => {
-    // console.log(`active: ${state.active} in useffect`)
-    // console.log(state)
     if (state.active == true) {
 
       if (state?.status == true) {

@@ -20,6 +20,8 @@ import {schema} from "../../../types/client-schema"
 import { createRef, useEffect } from "react"
 
 import { toast } from "@/components/ui/use-toast"
+import { useRef } from "react";
+
 
 import { revalidatePath } from "next/cache"
 import addClientData from "@/components/actions/addClientData"
@@ -38,8 +40,8 @@ export function ClientForm() {
   const SubmitButton = () => {
     const {pending} = useFormStatus();
     return (
-      <Button aria-disabled={pending} disabled={pending} className="mt-6 mx-4" >
-        {pending ? <Icons.spinner className=" mx-4 mr-2 h-4 w-4 animate-spin " /> : "Submit"}
+      <Button aria-disabled={pending} disabled={pending} type="submit" className="mt-6 mx-4" >
+        {pending ? <Icons.spinner className=" mr-2 h-4 w-4 animate-spin " /> : "Submit"}
       </Button> 
     );
   }
@@ -68,6 +70,8 @@ export function ClientForm() {
       adminPassword: "",
     })
   }
+  const formRef = useRef<HTMLFormElement>(null);
+
   const [state, formAction] = useFormState(addClientData, initialState);
   useEffect(()=>{
     console.log(`active: ${state.active} in useffect`)
@@ -85,7 +89,7 @@ export function ClientForm() {
         }else if (state?.resStatus == 400){
           toast({
             title: "Error in adding client",
-            description: state.message ? state.message.non_field_errors[0]  : "Bad request",
+            description: state.message.non_field_errors ? state.message.non_field_errors[0]  : "Bad request",
             variant : "destructive"
           })
         }
@@ -108,12 +112,11 @@ export function ClientForm() {
         <form 
           // onSubmit={form.handleSubmit(onSubmit)}
           action={formAction}
-          ref={ref}
-          // ref={formRef}
-          // onSubmit={form.handleSubmit(()=> formRef.current?.requestSubmit)}
+          //to bring client side validation
+          ref={formRef}
+          onSubmit={form.handleSubmit(()=> formRef?.current?.requestSubmit)}
           className=" mt-4 flex flex-row" >
           <div  className="gap-x-4 flex flex-row  items-end justify-between mb-2 ">
-          {/* style={{background:"blue"}} */}
             <div>
               <FormField
               control={form.control}
@@ -293,11 +296,9 @@ export function ClientForm() {
               )}
             />
           </div>
-          {/* className="bg-white" */}
           <div >
             <SubmitButton />
           </div>
-          {/* className="items-end py-4" */}
           
         </form>
           
