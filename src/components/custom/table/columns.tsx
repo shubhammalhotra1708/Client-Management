@@ -60,8 +60,8 @@ export const columns: ColumnDef<TClient>[] = [
           />
           {/* expand rows  */}
           <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="icon" className="-ml-2" >
-              <CaretDownIcon className="h-18 w-10" />
+            <Button variant="ghost" size="icon" className="" >
+              <CaretDownIcon className="h-18 w-10 mr-1" />
             </Button>
           </CollapsibleTrigger>
       </div>

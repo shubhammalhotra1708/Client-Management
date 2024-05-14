@@ -19,11 +19,11 @@ export default async function DemoPage() {
   const data = await getClientData();
 
   return (
-    <div className="container  mx-auto py-10">
+    <div className="container w-fit ">
       {/* <SsidForm /> */}
       <div className="flex flex-row justify-between">
-        <ModeToggle />
-        <LogoutComp logout={logout}/>
+        {/* <ModeToggle /> */}
+        {/* <LogoutComp logout={logout}/> */}
       </div>
 
       <ClientForm />

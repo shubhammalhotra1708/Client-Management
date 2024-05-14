@@ -54,3 +54,47 @@ export type TClient = {
     wifi_status: string;
     ethernet_status: boolean;
 }
+export type BrowsingData = {
+    status: string;
+    traffictype: string;
+    url: string;
+    interval: number;
+    browser: string;
+    browsermode: string;
+    actions: {
+      action: {
+        click: {
+          locator: string;
+        };
+      };
+    }[];
+    traffic_schedule: {
+      traffic_default: boolean;
+      weekdays_schedule: {
+        [key: string]: {
+          [key: string]: boolean;
+        };
+      };
+    };
+  };
+export type FileOpData = {
+    status: string;
+    traffictype: string;
+    host: string;
+    port: string;
+    interval: number;
+    operation: string;
+    mode: string;
+    filesize: number;
+    packetsize: number;
+    username: string;
+    password: string;
+    traffic_schedule: {
+      traffic_default: boolean;
+      weekdays_schedule: {
+        [key: string]: {
+          [key: string]: boolean;
+        };
+      };
+    };
+  };

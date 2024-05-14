@@ -23,7 +23,7 @@ export async function page ({params}: {params: {clientId : number}}){
   };
   return (
     <div>
-      <h1>hii {params.clientId}</h1>
+      <h1>Speedtest results for client {params.clientId}</h1>
         <GetGraph dataCus = {dataCus} />
 
     </div>

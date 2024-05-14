@@ -115,9 +115,8 @@ export function ClientForm() {
           //to bring client side validation
           ref={formRef}
           onSubmit={form.handleSubmit(()=> formRef?.current?.requestSubmit)}
-          className=" mt-4 flex flex-row" >
+          >
           <div  className="gap-x-4 flex flex-row  items-end justify-between mb-2 ">
-            <div>
               <FormField
               control={form.control}
               name="labName"
@@ -146,7 +145,6 @@ export function ClientForm() {
                 </FormItem>
               )}
             />
-            </div>
             
             <FormField
               control={form.control}
@@ -295,10 +293,11 @@ export function ClientForm() {
                 </FormItem>
               )}
             />
+              <SubmitButton  />
           </div>
-          <div >
+          {/* <div >
             <SubmitButton />
-          </div>
+          </div> */}
           
         </form>
           
