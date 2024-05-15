@@ -7,16 +7,19 @@ import { cookies } from 'next/headers'
 import { redirect } from "next/navigation"
 import { LogoutComp } from "@/components/auth/logout"
 import { logout } from "@/components/auth/loginActions";
+import DataTableComp from "@/components/custom/table/data-table-component"
+import { Suspense } from "react"
+import {SkeletonTable} from "@/components/custom/table/skeleton-table"
 
 
 
 export default async function DemoPage() {
-  const session = cookies().get("session")?.value;
-  if (!session || session === "") {
-    redirect("/login")
-  }
+  // const session = cookies().get("session")?.value;
+  // if (!session || session === "") {
+  //   redirect("/login")
+  // }
 
-  const data = await getClientData();
+  // const data = await getClientData();
 
   return (
     <div className="container w-fit ">
@@ -27,7 +30,9 @@ export default async function DemoPage() {
       </div>
 
       <ClientForm />
-      <DataTable columns={columns} data={data} />
+      <Suspense fallback={SkeletonTable()}>
+        <DataTableComp />
+      </Suspense>
     </div>
   )
 }

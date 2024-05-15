@@ -24,7 +24,7 @@ const sidebarNavItems = [
     href: "/",
   },
   {
-    title: "Run Traffic",
+    title: "Traffic Profile",
     href: "/traffic",
   },
   {
