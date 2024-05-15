@@ -50,7 +50,6 @@ export function DeleteClient({ client }: { client: TClient }) {
             title: "Client deleted successfully",
             description: state.message,
           })
-          // revalidatePath("/")
         } else {
           toast({
             title: "Error in deleting client",

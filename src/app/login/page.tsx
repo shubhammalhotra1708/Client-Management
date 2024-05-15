@@ -5,7 +5,7 @@ import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { getSession, login } from "@/components/auth/loginActions";
+import { login } from "@/components/auth/loginActions";
 import logo from "@/../public/logo.png"
 
 

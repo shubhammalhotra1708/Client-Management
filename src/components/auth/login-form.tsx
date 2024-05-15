@@ -54,7 +54,6 @@ export function LoginForm({ className, login, ...props }: LoginProps) {
   const [state, formAction] = useFormState(login, initialState);
   //toast
   useEffect(() => {
-    // console.log(`active: ${state.active} in useffect`)
     if (state.active == true) {
 
       if (state?.status == true) {
@@ -123,7 +122,7 @@ export function LoginForm({ className, login, ...props }: LoginProps) {
                   <FormLabel className="ml-1" >Password</FormLabel>
                   <FormControl>
                     <Input
-                      type="password"
+                      // type="password"
                       // disabled={isLoading}
                       {...field} />
                   </FormControl>

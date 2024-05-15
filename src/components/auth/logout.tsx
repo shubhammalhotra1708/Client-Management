@@ -29,7 +29,6 @@ export const LogoutComp = ({ className, logout, ...props }: LogoutProps) => {
   const [state, formAction] = useFormState(logout, initialState);
   //toast
   useEffect(() => {
-    // console.log(`active: ${state.active} in useffect`)
     if(state.active == true){
       if(state.status == true){
         redirect("/login")

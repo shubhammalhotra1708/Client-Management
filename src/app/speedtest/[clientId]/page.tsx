@@ -1,10 +1,12 @@
 import React from 'react';
 import { getGraphData } from "@/components/custom/graph/getGraphData";
 import { GetGraph } from '@/components/custom/graph/getGraph';
-
-export async function page ({params}: {params: {clientId : number}}){
+import { Button } from '@/components/ui/button';
+import { TbArrowBackUp } from "react-icons/tb";
+import Link from 'next/link'
+export async function page({ params }: { params: { clientId: number, } }) {
   const data = await getGraphData(params.clientId)
-  const dataCus  = {
+  const dataCus = {
     labels: data?.downloadLabels,
     datasets: [
       {
@@ -21,10 +23,18 @@ export async function page ({params}: {params: {clientId : number}}){
       },
     ],
   };
+
   return (
     <div>
-      <h1>Speedtest results for client {params.clientId}</h1>
-        <GetGraph dataCus = {dataCus} />
+      <div className='flex flex-row grid grid-cols-3 align-center'>
+        <Link href="/">
+          <Button variant="ghost" size ="icon" className='ml-10'>
+          <TbArrowBackUp className='h-4 w-4' />
+          </Button>
+        </Link>
+        <h1>Speedtest results for client {params.clientId}</h1>
+      </div>
+      <GetGraph dataCus={dataCus} />
 
     </div>
   );

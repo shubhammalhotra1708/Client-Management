@@ -1,7 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache";
-import { getSession, getUser } from "../auth/loginActions";
+import { getSession } from "../auth/loginActions";
 
 
 const baseUrl = process.env.BASE_URL;

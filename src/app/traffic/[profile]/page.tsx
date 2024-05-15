@@ -1,15 +1,5 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/HfFeCXlTLwd
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 "use client"
-import { Button } from "@/components/ui/button"
-// import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuRadioItem, DropdownMenuRadioGroup, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { CollapsibleTrigger, CollapsibleContent, Collapsible } from "@/components/ui/collapsible"
-import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
-import { Input } from "@/components/ui/input"
-import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { useState } from "react"
@@ -2102,7 +2092,6 @@ const data: BrowsingData[] = [
   }
 ]
 
-// export async function page ({params}: {params: {clientId : number}}){
 export default function page({params}: {params: {trafficProfileID : number}}) {
   const [trafficStatus, setTrafficStatus] = useState(true)
   return (
@@ -2110,22 +2099,6 @@ export default function page({params}: {params: {trafficProfileID : number}}) {
       <header className="flex items-center justify-between px-6 py-4 border-b dark:border-gray-800">
         <div className="flex items-center gap-4">
           <h1 className="text-xl font-bold">Traffic Profile {params.trafficProfileID} </h1>
-          {/* <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button className="rounded-full" size="icon" variant="ghost">
-                <SunIcon className="h-5 w-5" />
-                <span className="sr-only">Toggle dark mode</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Theme</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuRadioGroup>
-                <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
-              </DropdownMenuRadioGroup>
-            </DropdownMenuContent>
-          </DropdownMenu> */}
         </div>
       </header>
       <main className="flex-1 overflow-auto p-6 space-y-6">
@@ -2149,7 +2122,6 @@ export default function page({params}: {params: {trafficProfileID : number}}) {
                   <Label className="font-medium text-red-600" htmlFor="globalStatus">Offline</Label>
                 }
               </div>
-              {/* <span className="font-medium text-green-600">Online</span> */}
             </div>
           </CollapsibleContent>
         </Collapsible>

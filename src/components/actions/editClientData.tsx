@@ -7,10 +7,6 @@ export async function editClientData(
   formData: FormData
 ){
   const data= Object.fromEntries(formData);
-
-  // Hardcoded values
-    // const interfaceVal = "en0";
-  // const description = "Test description";
   const trafficProfile = "SampleProfile";
   const usr = await getUser();
   const user  = usr.user.id;

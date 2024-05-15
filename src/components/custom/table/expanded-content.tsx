@@ -2,7 +2,6 @@ import {
   TableCell,
   TableRow,
 } from "@/components/ui/table"
-import { hostname } from "os";
 
 const ExpandedContent: React.FC<any> = (details) => {
   const excludeFields = ['status','wifi_ip','hwaddr','rssi','operating_system' ,  'id', 'client_port' , 'client_lab', 'ssid_name' , 'bssid'];

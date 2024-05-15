@@ -124,8 +124,6 @@ export const columns: ColumnDef<TClient>[] = [
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            // <BsEthernet className="ml-1" color="green" size={15}/>
-
           ) : (
             <TooltipProvider>
               <Tooltip>
@@ -137,8 +135,6 @@ export const columns: ColumnDef<TClient>[] = [
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            // <BsEthernet className="ml-1"  color="red" size={15} />
-
           )}
           {row.original.wifi_status == "Connected" ? (
             <TooltipProvider>
@@ -151,7 +147,6 @@ export const columns: ColumnDef<TClient>[] = [
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            // <MdOutlineWifi className="ml-3"  color="green" size={18} />
           ) : (
             <TooltipProvider>
               <Tooltip>
@@ -163,8 +158,6 @@ export const columns: ColumnDef<TClient>[] = [
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            // <MdOutlineWifi className="ml-3"  color="red" size={18} />
-
           )}
         </div>
       )
@@ -211,7 +204,6 @@ export const columns: ColumnDef<TClient>[] = [
           <ShowGraph client={client}/>
           <EditClient client={client} />
           <DeleteClient client={client} />
-
         </div>
       )
     },

@@ -28,7 +28,7 @@ const sidebarNavItems = [
     href: "/traffic",
   },
   {
-    title: "Configure SSID",
+    title: "SSID",
     href: "/ssid",
   },
   {
