@@ -1,6 +1,5 @@
 "use server"
 import { getSession } from '@/components/auth/loginActions';
-import { TClient, TDataAll } from '@/types/types';
 
 const baseUrl = process.env.BASE_URL;
 const get_date = new Date();

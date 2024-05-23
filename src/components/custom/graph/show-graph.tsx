@@ -6,7 +6,6 @@ import Link from "next/link";
 export const ShowGraph = ({ client }: { client: TClient }) => {
   const clientID = client.id
   const clientName = client.hostname
-  // console.log(client.)
   return (
     <div>
       <Link href={`/speedtest/${clientID}`} >

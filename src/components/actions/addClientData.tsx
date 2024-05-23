@@ -4,10 +4,11 @@ import { getSession, getUser } from "../auth/loginActions";
 
 const baseUrl = process.env.BASE_URL;
 
-async function addClientData(
+export async function addClientData(
   prevState: any,
   formData: FormData
 ){
+  console.log("pressed button")
   const data= Object.fromEntries(formData);
   const usr = await getUser();
   const user = usr.user.id
@@ -56,4 +57,3 @@ async function addClientData(
     } 
 
 }
-export default addClientData;

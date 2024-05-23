@@ -13,7 +13,6 @@ export const idSchema = z.object({
   id: z.number().int().positive(),
 });
 export const emptySchema = z.object({
-  // random: z.string().trim(),
 });
 export const loginSchema = z.object({
   emailLogin : z.string().email(),

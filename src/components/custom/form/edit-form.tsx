@@ -259,7 +259,7 @@ export default function EditForm({client} : {client: TClient}) {
             />
             <DialogFooter>
               <DialogClose asChild>
-                <Button type="submit">Save changes</Button>
+                <Button className="mt-4" type="submit">Save changes</Button>
               </DialogClose>
             </DialogFooter>
         

@@ -23,8 +23,7 @@ import { toast } from "@/components/ui/use-toast"
 import { useRef } from "react";
 
 
-import { revalidatePath } from "next/cache"
-import addClientData from "@/components/actions/addClientData"
+import {addClientData} from "@/components/actions/addClientData"
 import { Icons } from "@/components/ui/icons"
 
 
@@ -39,6 +38,7 @@ export function ClientForm() {
 
   const SubmitButton = () => {
     const {pending} = useFormStatus();
+    console.log("submit button useref")
     return (
       <Button aria-disabled={pending} disabled={pending} type="submit" className="mt-6 mx-4" >
         {pending ? <Icons.spinner className=" mr-2 h-4 w-4 animate-spin " /> : "Submit"}
@@ -84,8 +84,6 @@ export function ClientForm() {
             description: state.message,
           })
           clearForm()
-          // ref.current?.reset()
-          // state=initialState
         }else if (state?.resStatus == 400){
           toast({
             title: "Error in adding client",
@@ -110,13 +108,11 @@ export function ClientForm() {
     <>
       <Form {...form} >
         <form 
-          // onSubmit={form.handleSubmit(onSubmit)}
           action={formAction}
-          //to bring client side validation
           ref={formRef}
-          onSubmit={form.handleSubmit(()=> formRef?.current?.requestSubmit)}
+          // onSubmit={form.handleSubmit(()=> formRef?.current?.requestSubmit)}
           >
-          <div  className="gap-x-4 flex flex-row  items-end justify-between mb-2 ">
+          <div  className="gap-x-4 flex flex-row justify-between mb-2 ">
               <FormField
               control={form.control}
               name="labName"
@@ -293,14 +289,14 @@ export function ClientForm() {
                 </FormItem>
               )}
             />
-              <SubmitButton  />
+              {/* <SubmitButton  />
+               */}
+               <Button type="submit" className="mt-6 mx-4">
+                Submit
+                </Button> 
+
           </div>
-          {/* <div >
-            <SubmitButton />
-          </div> */}
-          
         </form>
-          
       </Form>
     </>
 
