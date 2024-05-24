@@ -30,7 +30,6 @@ export async function addClientData(
     "interface_name": `${data.interfaceName}`,
   };
   console.log(JSON.stringify(bd));
-// const { toast } = useToast()
   const settings = {
     headers: {
       'Authorization': `Bearer ${session.token}`,

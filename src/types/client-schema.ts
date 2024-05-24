@@ -15,11 +15,11 @@ export const idSchema = z.object({
 export const emptySchema = z.object({
 });
 export const loginSchema = z.object({
-  emailLogin : z.string().email(),
-  passwordLogin : z.string().min(6),
+  emailLogin: z.string().email(),
+  passwordLogin: z.string().min(6),
 });
 export const signupSchema = z.object({
-  emailLogin : z.string().email(),
-  passwordLogin : z.string().min(6),
-  full_name : z.string().min(1),
+  emailLogin: z.string().email(),
+  passwordLogin: z.string().min(6),
+  full_name: z.string().min(1),
 });
