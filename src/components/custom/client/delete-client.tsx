@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { MdDeleteOutline } from "react-icons/md";
 import { TClient } from "@/types/types"
-import { deleteClientData } from "@/components/actions/deleteClientData";
+import { deleteClientData } from "@/actions/client/deleteClientData";
 import { useFormState } from "react-dom";
 import { toast } from "@/components/ui/use-toast"
 import { useEffect } from "react";
@@ -78,7 +78,7 @@ export function DeleteClient({ client }: { client: TClient }) {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure you want to delete your client {client.ethernet_ip} ?</AlertDialogTitle>
+          <AlertDialogTitle>Are you sure you want to delete your client {client.wifi_ip} ?</AlertDialogTitle>
           <AlertDialogDescription>
             This action will permanently delete your
             client and remove your data from our servers.

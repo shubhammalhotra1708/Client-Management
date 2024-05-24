@@ -1,10 +1,10 @@
-import { SignupForm } from "@/components/auth/signup-form"
+import { SignupForm } from "@/components/custom/auth/signup-form"
 import { Metadata } from "next"
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { signup } from "@/components/auth/loginActions";
+import { signup } from "@/actions/auth/loginActions";
 import Image from "next/image"
 import logo from "@/../public/logo.png"
 

@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { toast } from "@/components/ui/use-toast"
-import { loginSchema } from "../../types/client-schema";
+import { loginSchema } from "../../../types/client-schema";
 import { redirect } from "next/navigation"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"

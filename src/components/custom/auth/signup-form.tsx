@@ -23,7 +23,7 @@ import { useFormState } from "react-dom"
 import { useEffect } from "react"
 
 import { toast } from "@/components/ui/use-toast"
-import { signupSchema } from "../../types/client-schema";
+import { signupSchema } from "../../../types/client-schema";
 import { redirect } from "next/navigation"
 
 export interface SignupProps extends React.HTMLAttributes<HTMLDivElement> {

@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { DataTableColumnHeader } from "@/components/ui/datatable-column-header"
 import * as React from "react"
-import { EditClient } from "@/components/custom/crud/edit-client"
-import { DeleteClient } from "../crud/delete-client"
+import { EditClient } from "@/components/custom/client/edit-client"
+import { DeleteClient } from "../client/delete-client"
 import { CollapsibleTrigger } from "@/components/ui/collapsible"
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getGraphData } from "@/components/custom/graph/getGraphData";
+import { getGraphData } from "@/actions/graph/getGraphData";
 import { GetGraph } from '@/components/custom/graph/getGraph';
 import { Button } from '@/components/ui/button';
 import { TbArrowBackUp } from "react-icons/tb";

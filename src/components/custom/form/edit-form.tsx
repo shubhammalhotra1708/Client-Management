@@ -26,7 +26,7 @@ import {schema} from "../../../types/client-schema";
 
 import { revalidatePath } from "next/cache"
 import { TClient } from "@/types/types"
-import { editClientData } from "@/components/actions/editClientData"
+import { editClientData } from "@/actions/client/editClientData"
 
 export default function EditForm({client} : {client: TClient}) {
  

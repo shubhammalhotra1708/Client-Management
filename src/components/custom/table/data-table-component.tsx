@@ -1,6 +1,6 @@
 import { columns } from "@/components/custom/table/columns"
 import { DataTable } from "@/components/custom/table/data-table"
-import { getClientData } from "@/components/actions/getClientData"
+import { getClientData } from "@/actions/client/getClientData"
 import { cookies } from 'next/headers'
 import { redirect } from "next/navigation"
 

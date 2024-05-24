@@ -1,5 +1,5 @@
 "use server"
-import { getSession } from '@/components/auth/loginActions';
+import { getSession } from '@/actions/auth/loginActions';
 
 const baseUrl = process.env.BASE_URL;
 const get_date = new Date();

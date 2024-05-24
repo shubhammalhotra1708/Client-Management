@@ -18,7 +18,7 @@ import { schema } from "../../../types/client-schema"
 import { createRef, useEffect, useState } from "react"
 import { toast } from "@/components/ui/use-toast"
 import { useRef } from "react";
-import { addClientData } from "@/components/actions/addClientData"
+import { addClientData } from "@/actions/client/addClientData"
 import { Icons } from "@/components/ui/icons"
 
 export function ClientForm() {
@@ -55,13 +55,11 @@ export function ClientForm() {
     })
   }
   const formRef = useRef<HTMLFormElement>(null);
-
   const [state, formAction] = useFormState(addClientData, initialState);
   const [pending, setPending] = useState(false);
 
   useEffect(() => {
     // console.log(`active: ${state.active} in useffect`)
-    
     if (state.active == true) {
 
       if (state?.status == true) {

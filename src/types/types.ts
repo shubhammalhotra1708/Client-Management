@@ -29,6 +29,7 @@ export type TDataAll = {
 };
 
 export type TClient = {
+    wifi_ip?: string;
     hostname?:string;
     id: number;
     ethernet_ip: string;
