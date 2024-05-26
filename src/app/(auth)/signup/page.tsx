@@ -17,22 +17,7 @@ export const metadata: Metadata = {
 export default function SignupPage() {
   return (
     <>
-      <div className="container relative hidden h-[893px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-3 lg:px-0">
-        {/* container for top right button and text */}
-        <div className="absolute right-20 top-20 md:right-12 md:top-12 flex flex-row">
-          <p className="text-sm text-muted-foreground mt-2 mr-1">
-            Already registered ?
-          </p>
-          <Link
-            href="/login"
-            className={cn(
-              buttonVariants({ variant: "ghost" }),
-            )}
-          >
-            Log In
-          </Link>
-        </div>
-
+      <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-3 lg:px-0">
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
           <div className="absolute inset-0 bg-zinc-900" />
           {/* gird managing the left div , logo and heading  */}
@@ -58,14 +43,29 @@ export default function SignupPage() {
             </blockquote>
           </div>
         </div>
+        {/* right side div */}
         <div className="lg:p-8 col-span-2">
+          {/* container for top right button and text */}
+          <div className="absolute right-20 top-20 md:right-12 md:top-12 flex flex-row">
+            <p className="text-sm text-muted-foreground mt-2 mr-1">
+              Already registered ?
+            </p>
+            <Link
+              href="/login"
+              className={cn(
+                buttonVariants({ variant: "ghost" }),
+              )}
+            >
+              Log In
+            </Link>
+          </div>
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
                 Create an account
               </h1>
               <p className="text-sm text-muted-foreground">
-              Enter your email below to create your account
+                Enter your email below to create your account
               </p>
             </div>
             <SignupForm signup={signup} />

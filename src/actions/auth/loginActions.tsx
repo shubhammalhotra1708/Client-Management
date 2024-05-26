@@ -108,6 +108,7 @@ export async function login(
     //set cookies
     cookies().set("user", usr, {  httpOnly: true });
     cookies().set("session", session, {  httpOnly: true });
+    console.log(`status is ${fetchResponse.status}`)
 
 
     return {active:true,status: true, resStatus:fetchResponse.status, message: res.error}
@@ -137,8 +138,9 @@ export async function logout() {
     // Destroy the session
     cookies().set("session", "", { expires: new Date(0) });
     cookies().set("user", "", { expires: new Date(0) });
+    console.log(`status is ${fetchResponse.status}`)
 
-    return {active:true, status: false , message: "logged out"}
+    return {active:false, status: fetchResponse.status , message: "logged out"}
   } catch (e) {
     console.log(e);
     return {active:true, status: true, message : "error reaching api response - catch block"}

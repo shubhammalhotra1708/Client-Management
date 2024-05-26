@@ -15,7 +15,7 @@ export interface LogoutProps extends React.HTMLAttributes<HTMLDivElement> {
 export const LogoutComp = ({ className, logout, ...props }: LogoutProps) => {
   const initialState = {
     active: false,
-    status: false,
+    status: 0,
     message: "",
   }
   const SubmitButton = () => {
@@ -30,7 +30,7 @@ export const LogoutComp = ({ className, logout, ...props }: LogoutProps) => {
   //toast
   useEffect(() => {
     if(state.active == true){
-      if(state.status == true){
+      if(state.status == 200){
         redirect("/login")
       }else{
         toast({

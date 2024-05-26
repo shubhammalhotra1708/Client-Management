@@ -2,19 +2,15 @@
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google"
 import "@/app/globals.css";
-import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/theme/theme-provider"
-import { Toaster } from "@/components/ui/toaster"
+
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 })
-import Image from "next/image"
 import { SidebarNav } from "@/components/ui/sidebar-nav"
 import { Separator } from "@/components/ui/separator"
 import { LogoutComp } from "@/components/custom/auth/logout"
 import { logout } from "@/actions/auth/loginActions";
-
 
 export const metadata: Metadata = {
   title: "Home",
