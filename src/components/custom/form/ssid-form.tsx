@@ -31,10 +31,7 @@ export function SsidForm() {
     },
   })
  
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof schema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     setTimeout(() => {
       console.log("Hello, World!");
     }, 2000);

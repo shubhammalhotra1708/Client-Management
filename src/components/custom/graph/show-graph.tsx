@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { SiSpeedtest } from "react-icons/si";
 import { TClient } from "@/types/types"
 import Link from "next/link";
+
 export const ShowGraph = ({ client }: { client: TClient }) => {
   const clientID = client.id
   const clientName = client.hostname

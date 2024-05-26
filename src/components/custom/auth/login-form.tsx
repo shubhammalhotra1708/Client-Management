@@ -52,7 +52,6 @@ export function LoginForm({ className, login, ...props }: LoginProps) {
   }
 
   const [state, formAction] = useFormState(login, initialState);
-  //toast
   useEffect(() => {
     if (state.active == true) {
 

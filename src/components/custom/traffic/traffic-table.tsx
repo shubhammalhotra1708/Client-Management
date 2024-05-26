@@ -1,5 +1,4 @@
 "use client"
-
 import {
   ColumnDef,
   SortingState,
@@ -22,18 +21,14 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import * as React from "react"
-
-
 import {
   Collapsible,
   CollapsibleContent,
 } from "@/components/ui/collapsible"
-
 interface ReactTableProps<T extends object> {
   data: T[];
   columns: ColumnDef<T>[];
 }
-
 
 export const TrafficTable = <T extends object>({
   data,

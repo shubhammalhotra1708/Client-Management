@@ -48,7 +48,6 @@ export default function RootLayout({
           <div className="hidden space-y-6 p-10 pb-16 md:block overflow-hidden ">
             <div className="space-y-0.5">
               <div className="flex items-center justify-between">
-                
               <h2 className="text-2xl font-bold tracking-tight">Client Management System</h2>
               <LogoutComp logout={logout} />
               </div>

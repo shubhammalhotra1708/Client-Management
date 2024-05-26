@@ -8,13 +8,10 @@ import * as React from "react"
 import { EditClient } from "@/components/custom/client/edit-client"
 import { DeleteClient } from "../client/delete-client"
 import { CollapsibleTrigger } from "@/components/ui/collapsible"
-
-
-import { CaretDownIcon, CaretUpIcon } from "@radix-ui/react-icons"
+import { CaretDownIcon } from "@radix-ui/react-icons"
 import { MdOutlineWifi } from "react-icons/md";
 import { BsEthernet } from "react-icons/bs";
 import { ShowGraph } from "../graph/show-graph"
-
 import { TClient } from "@/types/types"
 import {
   Tooltip,
@@ -36,15 +33,6 @@ export const columns: ColumnDef<TClient>[] = [
           onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
           aria-label="Select all"
         />
-        // <Button
-        //   {...{
-        //     onClick: table.getToggleAllRowsExpandedHandler(),
-        //   }}
-        //   variant="ghost"
-        //   size="sm"
-        // >
-        //   {table.getIsAllRowsExpanded() ? <CaretUpIcon /> : <CaretDownIcon />}
-        // </Button>{' '}
     ),
 
     cell: ({ row }) => (
@@ -56,7 +44,6 @@ export const columns: ColumnDef<TClient>[] = [
             checked={row.getIsSelected()}
             onCheckedChange={(value) => row.toggleSelected(!!value)}
             aria-label="Select row"
-            // className="-mr-4"
           />
           {/* expand rows  */}
           <CollapsibleTrigger asChild>

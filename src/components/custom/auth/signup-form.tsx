@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/form"
 
 import { Input } from "@/components/ui/input"
-import { useFormState } from "react-dom"
+import { useFormState,useFormStatus } from "react-dom"
 import { useEffect } from "react"
 
 import { toast } from "@/components/ui/use-toast"
@@ -30,7 +30,6 @@ export interface SignupProps extends React.HTMLAttributes<HTMLDivElement> {
   signup: any;
 }
 export function SignupForm({ className, signup, ...props }: SignupProps) {
-
 
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
@@ -46,10 +45,17 @@ export function SignupForm({ className, signup, ...props }: SignupProps) {
     resStatus: 0,
     message: "",
   }
+  const SubmitButton = () => {
+    const {pending} = useFormStatus();
+    return (
+      <Button aria-disabled={pending} disabled={pending} type="submit">
+        {pending ? <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />: "Submit"}
+      </Button> 
+    );
+  }
 
   const [state, formAction] = useFormState(signup, initialState);
   useEffect(() => {
-    // console.log(`active: ${state.active} in useffect`)
     if (state.active == true) {
 
       if (state?.status == true) {
@@ -57,7 +63,7 @@ export function SignupForm({ className, signup, ...props }: SignupProps) {
           redirect("/")
         } else {
           toast({
-            title: "Error in loggin in",
+            title: "Error in sign in",
             description: state.message,
             variant: "destructive"
           })
@@ -162,12 +168,7 @@ export function SignupForm({ className, signup, ...props }: SignupProps) {
               </FormItem>
             )}
           />
-          <Button type="submit" onSubmit={onSubmit} disabled={isLoading}>
-            {isLoading && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
-            Sign In with Email
-          </Button>
+            <SubmitButton />
           </div>
         </form>
       </Form>

@@ -55,19 +55,4 @@ export const browsingColumns: ColumnDef<BrowsingData>[] = [
       )
     },
   },
-  // {
-  //   id: "actions",
-  //   cell: ({ row }) => {
-  //     const client = row.original
-  //     return (
-  //       <div className="flex flex-row">
-  //         <ShowGraph client={client}/>
-  //         <EditClient client={client} />
-  //         <DeleteClient client={client} />
-
-  //       </div>
-  //     )
-  //   },
-  // },
-
 ]

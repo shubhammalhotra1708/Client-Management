@@ -18,12 +18,9 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { useFormState } from "react-dom"
-// import { ReloadIcon } from "@radix-ui/react-icons"
 import { useEffect } from "react"
-
 import { toast } from "@/components/ui/use-toast"
 import {schema} from "../../../types/client-schema";
-
 import { revalidatePath } from "next/cache"
 import { TClient } from "@/types/types"
 import { editClientData } from "@/actions/client/editClientData"

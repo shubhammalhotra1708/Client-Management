@@ -27,7 +27,6 @@ export const LogoutComp = ({ className, logout, ...props }: LogoutProps) => {
     );
   }
   const [state, formAction] = useFormState(logout, initialState);
-  //toast
   useEffect(() => {
     if(state.active == true){
       if(state.status == 200){

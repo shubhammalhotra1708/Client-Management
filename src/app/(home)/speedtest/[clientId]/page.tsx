@@ -4,6 +4,7 @@ import { GetGraph } from '@/components/custom/graph/getGraph';
 import { Button } from '@/components/ui/button';
 import { TbArrowBackUp } from "react-icons/tb";
 import Link from 'next/link'
+
 export async function page({ params }: { params: { clientId: number, } }) {
   const data = await getGraphData(params.clientId)
   const dataCus = {
