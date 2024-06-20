@@ -1,5 +1,4 @@
 "use client"
-
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -24,8 +23,6 @@ import {
 } from "@/components/ui/table"
 import { Input } from "@/components/ui/input"
 import * as React from "react"
-
-
 import {
   Collapsible,
   CollapsibleContent,

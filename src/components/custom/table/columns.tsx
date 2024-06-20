@@ -5,16 +5,13 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { DataTableColumnHeader } from "@/components/ui/datatable-column-header"
 import * as React from "react"
-import { EditClient } from "@/components/custom/crud/edit-client"
-import { DeleteClient } from "../crud/delete-client"
+import { EditClient } from "@/components/custom/client/edit-client"
+import { DeleteClient } from "../client/delete-client"
 import { CollapsibleTrigger } from "@/components/ui/collapsible"
-
-
-import { CaretDownIcon, CaretUpIcon } from "@radix-ui/react-icons"
+import { CaretDownIcon } from "@radix-ui/react-icons"
 import { MdOutlineWifi } from "react-icons/md";
 import { BsEthernet } from "react-icons/bs";
 import { ShowGraph } from "../graph/show-graph"
-
 import { TClient } from "@/types/types"
 import {
   Tooltip,
@@ -36,15 +33,6 @@ export const columns: ColumnDef<TClient>[] = [
           onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
           aria-label="Select all"
         />
-        // <Button
-        //   {...{
-        //     onClick: table.getToggleAllRowsExpandedHandler(),
-        //   }}
-        //   variant="ghost"
-        //   size="sm"
-        // >
-        //   {table.getIsAllRowsExpanded() ? <CaretUpIcon /> : <CaretDownIcon />}
-        // </Button>{' '}
     ),
 
     cell: ({ row }) => (
@@ -56,12 +44,11 @@ export const columns: ColumnDef<TClient>[] = [
             checked={row.getIsSelected()}
             onCheckedChange={(value) => row.toggleSelected(!!value)}
             aria-label="Select row"
-            // className="-mr-4"
           />
           {/* expand rows  */}
           <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="icon" className="-ml-2" >
-              <CaretDownIcon className="h-18 w-10" />
+            <Button variant="ghost" size="icon" className="" >
+              <CaretDownIcon className="h-18 w-10 mr-1" />
             </Button>
           </CollapsibleTrigger>
       </div>
@@ -124,8 +111,6 @@ export const columns: ColumnDef<TClient>[] = [
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            // <BsEthernet className="ml-1" color="green" size={15}/>
-
           ) : (
             <TooltipProvider>
               <Tooltip>
@@ -137,8 +122,6 @@ export const columns: ColumnDef<TClient>[] = [
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            // <BsEthernet className="ml-1"  color="red" size={15} />
-
           )}
           {row.original.wifi_status == "Connected" ? (
             <TooltipProvider>
@@ -151,7 +134,6 @@ export const columns: ColumnDef<TClient>[] = [
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            // <MdOutlineWifi className="ml-3"  color="green" size={18} />
           ) : (
             <TooltipProvider>
               <Tooltip>
@@ -163,8 +145,6 @@ export const columns: ColumnDef<TClient>[] = [
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            // <MdOutlineWifi className="ml-3"  color="red" size={18} />
-
           )}
         </div>
       )
@@ -206,12 +186,13 @@ export const columns: ColumnDef<TClient>[] = [
     id: "actions",
     cell: ({ row }) => {
       const client = row.original
+      const speedtestStatus = row.original.wifi_status == "Connected" ? false : true
       return (
         <div className="flex flex-row">
-          <ShowGraph client={client}/>
-          <EditClient client={client} />
+          
+          <ShowGraph client={client} status={speedtestStatus}/>
+          {/* <EditClient client={client} /> */}
           <DeleteClient client={client} />
-
         </div>
       )
     },

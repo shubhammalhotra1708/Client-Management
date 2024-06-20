@@ -18,15 +18,12 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { useFormState } from "react-dom"
-// import { ReloadIcon } from "@radix-ui/react-icons"
 import { useEffect } from "react"
-
 import { toast } from "@/components/ui/use-toast"
 import {schema} from "../../../types/client-schema";
-
 import { revalidatePath } from "next/cache"
 import { TClient } from "@/types/types"
-import { editClientData } from "@/components/actions/editClientData"
+import { editClientData } from "@/actions/client/editClientData"
 
 export default function EditForm({client} : {client: TClient}) {
  
@@ -45,33 +42,34 @@ export default function EditForm({client} : {client: TClient}) {
   const initialState = {
     active: false,
     status: false,
+    resStatus: 0,
     message: "",
   }
-
-  const [state, formAction] = useFormState(editClientData, initialState);
+  const clientID = client.id
+  const editClientDataID = editClientData.bind(null, clientID) 
+  const [state, formAction] = useFormState(editClientDataID, initialState);
   useEffect(()=>{
     // console.log(`active: ${state.active} in useffect`)
-    if(state.active == true){
+    if (state.active == true) {
 
-      if(state?.status == true){
-        if(state?.resStatus == 201){
+      if (state?.status == true) {
+        if (state?.resStatus == 200) {
           toast({
-            title: "Client edited successfully",
+            title: "Client deleted successfully",
             description: state.message,
           })
-          revalidatePath("/")
-        }else{
+        } else {
           toast({
-            title: "Error in editing client",
-            description: state.message ? state.message.non_field_errors[0]  : "Bad request",
-            variant : "destructive"
+            title: "Error in deleting client",
+            description: state.message ? state.message["non_field_errors"][0]  : "Bad request",
+            variant: "destructive"
           })
         }
-      }else{
+      } else {
         toast({
           title: "Error in reaching wifi agent",
           description: state.message,
-          variant : "destructive"
+          variant: "destructive"
         })
       }
     }
@@ -105,7 +103,7 @@ export default function EditForm({client} : {client: TClient}) {
                       }
                     }}
                     
-                     placeholder="placeholder..." {...field} />
+                     placeholder="Pegasus" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -133,7 +131,7 @@ export default function EditForm({client} : {client: TClient}) {
                       }
                     }}
                     
-                     placeholder="placeholder..." {...field} />
+                     placeholder="Test client" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -160,7 +158,7 @@ export default function EditForm({client} : {client: TClient}) {
                       }
                     }}
                     //  required={false} 
-                     placeholder="placeholder..." {...field} />
+                     placeholder="10.87.10.200" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -212,7 +210,7 @@ export default function EditForm({client} : {client: TClient}) {
                         }
                       }
                     }}
-                    placeholder="placeholder..." {...field} />
+                    placeholder="en1" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -238,7 +236,7 @@ export default function EditForm({client} : {client: TClient}) {
                         }
                       }
                     }}
-                    placeholder="placeholder..." {...field} />
+                    placeholder="Pune-lab" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -251,7 +249,7 @@ export default function EditForm({client} : {client: TClient}) {
                 <FormItem>
                   <FormLabel className="ml-1" >Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="placeholder..." {...field} />
+                    <Input placeholder="Welcome" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -259,7 +257,7 @@ export default function EditForm({client} : {client: TClient}) {
             />
             <DialogFooter>
               <DialogClose asChild>
-                <Button type="submit">Save changes</Button>
+                <Button className="mt-4" type="submit">Save changes</Button>
               </DialogClose>
             </DialogFooter>
         
