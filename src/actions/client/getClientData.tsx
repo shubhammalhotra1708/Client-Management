@@ -15,7 +15,7 @@ export async function getClientData(): Promise<TClient[]> {
                 'Authorization': `Bearer ${session.token}`
             }
         });
-        // console.log(`${baseUrl}/manage/clients`)
+        console.log(`${baseUrl}/manage/clients`)
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);

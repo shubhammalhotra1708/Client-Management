@@ -4,9 +4,9 @@ export default function NotFound() {
   return (
     <div className="flex flex-col overflow-hidden items-center justify-start min-h-[100dvh]  py-10 px-4 md:px-6 space-y-6">
       <div className="text-center space-y-2">
-        <h1 className="text-7xl font-bold tracking-tighter">404</h1>
+        <h1 className="text-7xl font-bold tracking-tighter">Coming Soon!</h1>
         <p className="text-gray-500 dark:text-gray-400 text-lg">
-          Oops, the page you are looking for could not be found.
+          Feature verification pending. Please check back later.
         </p>
       </div>
       <Link

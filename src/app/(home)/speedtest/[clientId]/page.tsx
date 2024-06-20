@@ -33,7 +33,7 @@ export async function page({ params }: { params: { clientId: number, } }) {
           <TbArrowBackUp className='h-4 w-4' />
           </Button>
         </Link>
-        <h1>Speedtest results for client {params.clientId}</h1>
+        <h1>Speedtest results for client</h1>
       </div>
       <GetGraph dataCus={dataCus} />
 

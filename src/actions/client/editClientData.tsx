@@ -3,6 +3,7 @@ import { getSession, getUser } from "../auth/loginActions";
 const baseUrl = process.env.BASE_URL;
 
 export async function editClientData(
+  clientID:number, 
   prevState: any,
   formData: FormData
 ){
@@ -10,7 +11,6 @@ export async function editClientData(
   const trafficProfile = "SampleProfile";
   const usr = await getUser();
   const user  = usr.user.id;
-  console.log(`id is ${user}`)
   const session = await getSession();
 
   // Create the body object
@@ -23,7 +23,7 @@ export async function editClientData(
     "client_lab": `${data.labName}`, 
     "traffic_profile": trafficProfile,
     "description": `${data.descriptionName}`, 
-    "id" : 10,
+    "id" : `${clientID}`,
     "interface_name": `${data.interfaceName}`,
   };
 
@@ -44,7 +44,9 @@ export async function editClientData(
       const res = await fetchResponse.json();
       console.log(res);
       console.log(fetchResponse.status);
+
       return {active:true,status: true, resStatus:fetchResponse.status, message: res}
+
   } catch (e) {
       console.log(e);
       return {active:true, status: false,message : "error reaching api response - catch block"}

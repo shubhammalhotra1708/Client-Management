@@ -186,10 +186,12 @@ export const columns: ColumnDef<TClient>[] = [
     id: "actions",
     cell: ({ row }) => {
       const client = row.original
+      const speedtestStatus = row.original.wifi_status == "Connected" ? false : true
       return (
         <div className="flex flex-row">
-          <ShowGraph client={client}/>
-          <EditClient client={client} />
+          
+          <ShowGraph client={client} status={speedtestStatus}/>
+          {/* <EditClient client={client} /> */}
           <DeleteClient client={client} />
         </div>
       )

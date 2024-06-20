@@ -23,7 +23,7 @@ export async function getGraphData(
   console.log(JSON.stringify(bd));
   try {
     const fetchRes = await fetch(`${baseUrl}/monitor/speedtest/`,settings);
-    console.log(`POST ${baseUrl}/monitor/speedtest`)
+    console.log(`POST ${baseUrl}/monitor/speedtest/`)
     const res = await fetchRes.json(); 
     console.log(fetchRes.ok);
     console.log(fetchRes.status);
