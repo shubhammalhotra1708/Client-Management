@@ -30,7 +30,7 @@ export async function page({ params }: { params: { clientId: number, } }) {
       <div className='flex flex-row grid grid-cols-3 align-center'>
         <Link href="/">
           <Button variant="ghost" size ="icon" className='ml-10'>
-          <TbArrowBackUp className='h-4 w-4' />
+            <TbArrowBackUp className='h-4 w-4' />
           </Button>
         </Link>
         <h1>Speedtest results for client</h1>
